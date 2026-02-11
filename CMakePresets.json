@@ -1,0 +1,48 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "base-ninja-multi",
+      "generator": "Ninja Multi-Config",
+      "binaryDir": "${sourceDir}/_build"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "build-debug",
+      "configurePreset": "base-ninja-multi",
+      "configuration": "Debug",
+      "targets": []
+    },
+    {
+      "name": "build-release",
+      "configurePreset": "base-ninja-multi",
+      "configuration": "Release",
+      "targets": []
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "all-configs",
+      "steps": [
+        { "type": "configure", "name": "base-ninja-multi" },
+        { "type": "build", "name": "build-debug" },
+        { "type": "build", "name": "build-release" }
+      ]
+    },
+    {
+      "name": "build-debug",
+      "steps": [
+        { "type": "configure", "name": "base-ninja-multi" },
+        { "type": "build", "name": "build-debug" }
+      ]
+    },
+    {
+      "name": "build-release",
+      "steps": [
+        { "type": "configure", "name": "base-ninja-multi" },
+        { "type": "build", "name": "build-release" }
+      ]
+    }
+  ]
+}
