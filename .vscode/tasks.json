@@ -1,0 +1,51 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "cppbuild",
+      "label": "C/C++: g++.exe build active file", // launch.jsonのpreLaunchTaskと一致させる
+      "command": "C:/mingw-w64/mingw64/bin/g++.exe", // 実際のパスに合わせて修正
+      "args": [
+        "-fdiagnostics-color=always",
+        "-g",
+        "${file}",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}.exe"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "コンパイラ: C:/mingw-w64/mingw64/bin/g++.exe" // 実際のパスに合わせて修正
+    },
+    {
+      "label": "Build CMake All",
+      "type": "shell",
+      "command": "cmake --workflow --preset all-configs"
+    },
+    {
+      "label": "Delete CMake Objects",
+      "type": "shell",
+      "command": "cmake --build _build --config Debug --target clean; cmake --build _build --config Release --target clean"
+    }
+    ,
+    {
+      "type": "shell",
+      "label": "CMake Workflow",
+      "command": "cmake --workflow --preset all-configs",
+      "options": {
+        "env": {
+          "LC_ALL": "C.UTF-8",
+          "LANG": "C.UTF-8"
+        }
+      },
+      "problemMatcher": []
+    }
+   ]
+}
