@@ -1,0 +1,232 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "C:/work/develop/git/cmake/projects/app_test2/_out/bin/shared/x64/Release/common.dll"
+		},
+		{
+			"path" : "C:/work/develop/git/cmake/projects/app_test2/_out/obj/shared/x64/Release/common.dll.a"
+		},
+		{
+			"path" : "C:/work/develop/git/cmake/projects/app_test2/_out/bin/shared/x64/Release/common.pdb"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"add_link_options",
+			"add_custom_command",
+			"add_compile_options",
+			"target_compile_definitions",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"target/lib/common/shared/CMakeLists.txt",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 8,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 28,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 45,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 21,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 25,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 25,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 14,
+				"parent" : 0
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 9
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-O3 -DNDEBUG -std=gnu++26"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "-save-temps"
+				},
+				{
+					"backtrace" : 6,
+					"fragment" : "-DUNICODE"
+				},
+				{
+					"backtrace" : 6,
+					"fragment" : "-D_UNICODE"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 7,
+					"define" : "LIB_COMMON_EXPORT"
+				},
+				{
+					"backtrace" : 7,
+					"define" : "LIB_COMMON_SHARED"
+				},
+				{
+					"backtrace" : 7,
+					"define" : "PLATFORM_NAME=L\"x64\""
+				},
+				{
+					"backtrace" : 7,
+					"define" : "PROJECT_DIR=LR\"!raw(C:/work/develop/git/cmake/projects/app_test2)!raw\""
+				},
+				{
+					"backtrace" : 7,
+					"define" : "PROJECT_NAME=L\"app_test2\""
+				},
+				{
+					"backtrace" : 7,
+					"define" : "TARGET_NAME=L\"shared_common\""
+				},
+				{
+					"define" : "shared_common_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 8,
+					"path" : "C:/work/develop/git/cmake/projects/app_test2/inc"
+				},
+				{
+					"backtrace" : 8,
+					"path" : "C:/work/develop/git/cmake/projects/app_test2/inc/common"
+				},
+				{
+					"backtrace" : 8,
+					"path" : "C:/work/develop/git/cmake/projects/app_test2/inc/lib"
+				},
+				{
+					"backtrace" : 8,
+					"path" : "C:/work/develop/git/cmake/projects/app_test2/inc/lib/common"
+				},
+				{
+					"backtrace" : 8,
+					"path" : "C:/work/develop/git/cmake/projects/app_test2/target/lib/common/shared"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "26"
+			},
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"id" : "shared_common::@d8705dc06206d10cf345",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-shared",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-municode",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "shared_common",
+	"nameOnDisk" : "common.dll",
+	"orderDependencies" : 
+	[
+		{
+			"backtrace" : 4,
+			"id" : "shared_common::@d8705dc06206d10cf345"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "target/lib/common/shared",
+		"source" : "target/lib/common/shared"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/lib/common/common.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

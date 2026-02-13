@@ -40,14 +40,14 @@
 #   define CHAR_SET_NAME L"Ansi"    ///< 文字セット
 #endif
 
-#ifdef LIB_DYNAMIC
-#   define CONFIG_NAME L"DynamicLibrary"     ///< 構成の種類
-#elif defined(APP_DYNAMIC)
-#   define CONFIG_NAME L"DynamicApplication" ///< 構成の種類
-#elif defined(APP_STATIC)
+#if defined(APP_STATIC)
 #   define CONFIG_NAME L"StaticApplication"  ///< 構成の種類
+#elif defined(APP_SHARED)
+#   define CONFIG_NAME L"SharedApplication" ///< 構成の種類
 #elif defined(LIB_STATIC)
 #   define CONFIG_NAME L"StaticLibrary"      ///< 構成の種類
+#elif defined(LIB_DYNAMIC)
+#   define CONFIG_NAME L"SharedLibrary"     ///< 構成の種類
 #else
 #   define CONFIG_NAME L"Unknown"            ///< 構成の種類
 #endif

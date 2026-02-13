@@ -10,11 +10,15 @@
 //=============================================================================
 // インクルードファイル
 //-----------------------------------------------------------------------------
-#include "program.hpp"
 #include <stdio.h>
 #include <locale.h>
 #include <io.h>
 #include <fcntl.h>
+
+//=============================================================================
+// インクルード実装ファイル
+//-----------------------------------------------------------------------------
+#include "program.hpp"
 
 //=============================================================================
 // プログラム名前空間
@@ -30,27 +34,14 @@ namespace program {
         // 処理ブロック
         int result{0};
         do {
-            // 漢字出力
-            ::setlocale(LC_ALL, "");
-            ::_setmode(_fileno(stdout), _O_U8TEXT);
+            // モジュール情報出力
+            Program::OutputModuleInfo(hInstance);
+            // クラス情報出力
             ::wprintf(L"-------------------------------------------------------------------------------\n");
             ::wprintf(L"これはプログラムクラスのMain関数です。\n");
-            // モジュールファイルパス取得
-            wchar_t buffer[MAX_PATH]{};
-            ::GetModuleFileNameW(hInstance, buffer, sizeof buffer/sizeof buffer[0]);
-            // プログラム情報出力
             ::wprintf(L"-------------------------------------------------------------------------------\n");
-            ::wprintf(L"プロジェクト名：%ls\n", PROJECT_NAME);
-            ::wprintf(L"ターゲット名：%ls\n", TARGET_NAME);
             ::wprintf(L"名前空間名：%ls\n", L"プログラム名前空間");
             ::wprintf(L"クラス名：%ls\n", L"プログラムクラス");
-            ::wprintf(L"文字セット：%ls\n", CHAR_SET_NAME);
-            ::wprintf(L"プラットフォーム：%ls\n", PLATFORM_NAME);
-            ::wprintf(L"構成：%ls\n", BUILD_TYPE);
-            ::wprintf(L"構成の種類：%ls\n", CONFIG_NAME);
-            ::wprintf(L"ターゲット種別：%ls\n", TARGET_TYPE);
-            ::wprintf(L"プロジェクトディレクトリ：%ls\n", PROJECT_DIR);
-            ::wprintf(L"モジュールファイルパス：%ls\n", buffer);
         } while (false);
 
         // 実行結果

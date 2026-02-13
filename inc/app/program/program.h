@@ -108,5 +108,16 @@ namespace program {
         /// @attention アプリケーション側で実装が必要です。
         //---------------------------------------------------------------------
         static int Main(HINSTANCE hInstance) noexcept;
+
+        //---------------------------------------------------------------------
+        /// モジュール情報出力関数
+        ///
+        /// モジュール情報出力関数です。
+        ///
+        /// @param[in] hInstance インスタンスハンドル
+        /// @return    なし
+        /// @attention なし
+        //---------------------------------------------------------------------
+        static void OutputModuleInfo(HINSTANCE hInstance) noexcept;
     };
 }

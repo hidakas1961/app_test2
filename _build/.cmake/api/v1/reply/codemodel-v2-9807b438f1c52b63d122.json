@@ -1,0 +1,499 @@
+{
+	"configurations" : 
+	[
+		{
+			"abstractTargets" : [],
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"jsonFile" : "directory-.-Debug-f6f22219c74102c3da70.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "target/lib/common/static",
+					"jsonFile" : "directory-target.lib.common.static-Debug-7fa3aebfe914fe52f0b2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "target/lib/common/static",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "target/app/program/static",
+					"jsonFile" : "directory-target.app.program.static-Debug-ad470ebeb346075d982c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "target/app/program/static",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "target/app/test/static",
+					"jsonFile" : "directory-target.app.test.static-Debug-8a9f56ab3e67ba7bbb38.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "target/app/test/static",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "target/lib/common/shared",
+					"jsonFile" : "directory-target.lib.common.shared-Debug-362169a87642db5b81af.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "target/lib/common/shared",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "target/app/test/shared",
+					"jsonFile" : "directory-target.app.test.shared-Debug-097fa6132fa6bfb2d2fc.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "target/app/test/shared",
+					"targetIndexes" : 
+					[
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"name" : "app_test2",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "program::@2dfbf212396e4268f1ae",
+					"jsonFile" : "target-program-Debug-dabb9e7dc3909ea246d6.json",
+					"name" : "program",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "shared_common::@d8705dc06206d10cf345",
+					"jsonFile" : "target-shared_common-Debug-58dfd2318b1b5b5c3d6a.json",
+					"name" : "shared_common",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "shared_test::@5490c689874b1adfb94b",
+					"jsonFile" : "target-shared_test-Debug-25bc891e429e23c9929c.json",
+					"name" : "shared_test",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "static_common::@ed7b61d90a1d78a03485",
+					"jsonFile" : "target-static_common-Debug-86a5aa726f236aa865e1.json",
+					"name" : "static_common",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "static_test::@6ffc4d4baa878cf7cfed",
+					"jsonFile" : "target-static_test-Debug-c04973f86c18d5d3a14b.json",
+					"name" : "static_test",
+					"projectIndex" : 0
+				}
+			]
+		},
+		{
+			"abstractTargets" : [],
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"jsonFile" : "directory-.-Release-f6f22219c74102c3da70.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "target/lib/common/static",
+					"jsonFile" : "directory-target.lib.common.static-Release-7fa3aebfe914fe52f0b2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "target/lib/common/static",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "target/app/program/static",
+					"jsonFile" : "directory-target.app.program.static-Release-ad470ebeb346075d982c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "target/app/program/static",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "target/app/test/static",
+					"jsonFile" : "directory-target.app.test.static-Release-8a9f56ab3e67ba7bbb38.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "target/app/test/static",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "target/lib/common/shared",
+					"jsonFile" : "directory-target.lib.common.shared-Release-362169a87642db5b81af.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "target/lib/common/shared",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "target/app/test/shared",
+					"jsonFile" : "directory-target.app.test.shared-Release-097fa6132fa6bfb2d2fc.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "target/app/test/shared",
+					"targetIndexes" : 
+					[
+						2
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"name" : "app_test2",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "program::@2dfbf212396e4268f1ae",
+					"jsonFile" : "target-program-Release-a01c7792fb0b3e2e7ead.json",
+					"name" : "program",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "shared_common::@d8705dc06206d10cf345",
+					"jsonFile" : "target-shared_common-Release-c510b55ab782686a5d8c.json",
+					"name" : "shared_common",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "shared_test::@5490c689874b1adfb94b",
+					"jsonFile" : "target-shared_test-Release-b39c3cfbdb1fefaca17f.json",
+					"name" : "shared_test",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "static_common::@ed7b61d90a1d78a03485",
+					"jsonFile" : "target-static_common-Release-8d138110f14c7de43392.json",
+					"name" : "static_common",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "static_test::@6ffc4d4baa878cf7cfed",
+					"jsonFile" : "target-static_test-Release-22f0eac4ca1ba67ed1b7.json",
+					"name" : "static_test",
+					"projectIndex" : 0
+				}
+			]
+		},
+		{
+			"abstractTargets" : [],
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"jsonFile" : "directory-.-RelWithDebInfo-f6f22219c74102c3da70.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "target/lib/common/static",
+					"jsonFile" : "directory-target.lib.common.static-RelWithDebInfo-7fa3aebfe914fe52f0b2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "target/lib/common/static",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "target/app/program/static",
+					"jsonFile" : "directory-target.app.program.static-RelWithDebInfo-ad470ebeb346075d982c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "target/app/program/static",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "target/app/test/static",
+					"jsonFile" : "directory-target.app.test.static-RelWithDebInfo-8a9f56ab3e67ba7bbb38.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "target/app/test/static",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "target/lib/common/shared",
+					"jsonFile" : "directory-target.lib.common.shared-RelWithDebInfo-362169a87642db5b81af.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "target/lib/common/shared",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "target/app/test/shared",
+					"jsonFile" : "directory-target.app.test.shared-RelWithDebInfo-097fa6132fa6bfb2d2fc.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "target/app/test/shared",
+					"targetIndexes" : 
+					[
+						2
+					]
+				}
+			],
+			"name" : "RelWithDebInfo",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"name" : "app_test2",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "program::@2dfbf212396e4268f1ae",
+					"jsonFile" : "target-program-RelWithDebInfo-4de78e26d770ce8e0d75.json",
+					"name" : "program",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "shared_common::@d8705dc06206d10cf345",
+					"jsonFile" : "target-shared_common-RelWithDebInfo-5ee1239aa62e1c9f8895.json",
+					"name" : "shared_common",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "shared_test::@5490c689874b1adfb94b",
+					"jsonFile" : "target-shared_test-RelWithDebInfo-a459b5a2a39318269d4c.json",
+					"name" : "shared_test",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "static_common::@ed7b61d90a1d78a03485",
+					"jsonFile" : "target-static_common-RelWithDebInfo-8fad012c11cdbe657296.json",
+					"name" : "static_common",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "static_test::@6ffc4d4baa878cf7cfed",
+					"jsonFile" : "target-static_test-RelWithDebInfo-50083ec8142f675d2a43.json",
+					"name" : "static_test",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/work/develop/git/cmake/projects/app_test2/_build",
+		"source" : "C:/work/develop/git/cmake/projects/app_test2"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 9
+	}
+}
