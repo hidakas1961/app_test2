@@ -13,9 +13,6 @@
 // インクルードファイル
 //-----------------------------------------------------------------------------
 #include "helper.h"
-#include <locale.h>
-#include <io.h>
-#include <fcntl.h>
 
 //=============================================================================
 // 無名名前空間
@@ -28,23 +25,20 @@ namespace {
     void OutputModuleInfo(HINSTANCE hInstance) noexcept {
         // 処理ブロック
         do {
-            // 漢字出力
-            ::setlocale(LC_ALL, "");
-            ::_setmode(_fileno(stdout), _O_U8TEXT);
             // モジュールファイルパス取得
-            wchar_t buffer[MAX_PATH]{};
-            ::GetModuleFileNameW(hInstance, buffer, sizeof buffer/sizeof buffer[0]);
+            char buffer[MAX_PATH]{};
+            ::GetModuleFileNameA(hInstance, buffer, sizeof buffer/sizeof buffer[0]);
             // モジュール情報出力
-            ::wprintf(L"-------------------------------------------------------------------------------\n");
-            ::wprintf(L"ターゲット種別：%ls\n", TARGET_TYPE);
-            ::wprintf(L"モジュールファイルパス：%ls\n", buffer);
-            ::wprintf(L"プロジェクトディレクトリ：%ls\n", PROJECT_DIR);
-            ::wprintf(L"プロジェクト名：%ls\n", PROJECT_NAME);
-            ::wprintf(L"ターゲット名：%ls\n", TARGET_NAME);
-            ::wprintf(L"文字セット：%ls\n", CHAR_SET_NAME);
-            ::wprintf(L"プラットフォーム：%ls\n", PLATFORM_NAME);
-            ::wprintf(L"構成：%ls\n", BUILD_TYPE);
-            ::wprintf(L"構成の種類：%ls\n", CONFIG_NAME);
+            std::cout << std::format("-------------------------------------------------------------------------------\n");
+            std::cout << std::format("ターゲット種別：{}\n", TARGET_TYPE);
+            std::cout << std::format("モジュールファイルパス：{}\n", buffer);
+            std::cout << std::format("プロジェクトディレクトリ：{}\n", PROJECT_DIR);
+            std::cout << std::format("プロジェクト名：{}\n", PROJECT_NAME);
+            std::cout << std::format("ターゲット名：{}\n", TARGET_NAME);
+            std::cout << std::format("文字セット：{}\n", CHAR_SET_NAME);
+            std::cout << std::format("プラットフォーム：{}\n", PLATFORM_NAME);
+            std::cout << std::format("構成：{}\n", BUILD_TYPE);
+            std::cout << std::format("構成の種類：{}\n", CONFIG_NAME);
         } while (false);
     }
 }

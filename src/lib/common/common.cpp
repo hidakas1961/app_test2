@@ -51,9 +51,15 @@ BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved) {
         if (DLL_PROCESS_ATTACH == dwReason) {
             // インスタンスハンドル取得
             s_hInstance = hInstance;
+            // DLL初期化関数情報出力
+            std::cout << std::format("-------------------------------------------------------------------------------\n");
+            std::cout << std::format("共通ライブラリ：DLL初期化関数：アタッチ\n");
         }
         // 関数呼び出し理由チェック
         else if (DLL_PROCESS_DETACH == dwReason) {
+            // DLL初期化関数情報出力
+            std::cout << std::format("-------------------------------------------------------------------------------\n");
+            std::cout << std::format("共通ライブラリ：DLL初期化関数：デタッチ\n");
         }
 
         // 成功！
@@ -77,8 +83,8 @@ namespace lib_common {
     //-------------------------------------------------------------------------
     // インスタンス取得関数
     LibCommon& LibCommon::GetInstance() noexcept {
-        static LibCommon s_cInstance; ///< 共通ライブラリクラスインスタンス
-        return s_cInstance;
+        static LibCommon* s_pInstance = new LibCommon; ///< 共通ライブラリクラスインスタンスポインタ※デストラクタより先にデタッチが先に呼ばれるのでわざとインスタンスを残す
+        return *s_pInstance;
     }
 
     //=========================================================================
@@ -91,22 +97,8 @@ namespace lib_common {
             // モジュール情報出力
             ::OutputModuleInfo(s_hInstance);
             // クラス情報出力
-            ::wprintf(L"-------------------------------------------------------------------------------\n");
-            ::wprintf(L"これは共通ライブラリクラスのコンストラクタです。\n");
-            ::wprintf(L"-------------------------------------------------------------------------------\n");
-            ::wprintf(L"名前空間名：%ls\n", L"テストアプリケーション名前空間");
-            ::wprintf(L"クラス名：%ls\n", L"共通ライブラリクラス");
-        } while (false);
-    }
-
-    //-------------------------------------------------------------------------
-    // デストラクタ
-    LibCommon::~LibCommon() noexcept {
-        // 処理ブロック
-        do {
-            // クラス情報出力
-            ::wprintf(L"-------------------------------------------------------------------------------\n");
-            ::wprintf(L"これは共通ライブラリクラスのデストラクタです。\n");
+            std::cout << std::format("-------------------------------------------------------------------------------\n");
+            std::cout << std::format("共通ライブラリクラス：コンストラクタ\n");
         } while (false);
     }
 }

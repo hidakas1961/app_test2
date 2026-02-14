@@ -21,15 +21,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_compile_options(-save-temps)
 
 #------------------------------------------------------------------------------
-# ユニコード設定
-add_compile_options(
-  -DUNICODE -D_UNICODE
-)
-add_link_options(
-  -municode
-)
-
-#------------------------------------------------------------------------------
 # ビルド環境変数設定
 get_filename_component(PROJECT_NAME "${CMAKE_SOURCE_DIR}" NAME)
 project(${PROJECT_NAME})

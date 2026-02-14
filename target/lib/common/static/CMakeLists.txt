@@ -24,11 +24,11 @@ target_include_directories(static_common PRIVATE
 # コンパイルオプション
 target_compile_definitions(static_common PRIVATE
   $<$<OR:$<COMPILE_LANGUAGE:C>,$<COMPILE_LANGUAGE:CXX>>:
-    -D "PROJECT_DIR=LR\"!raw(${PROJECT_SOURCE_DIR})!raw\""
-    -D "PROJECT_NAME=L\"${PROJECT_NAME}\""
-    -D "TARGET_NAME=L\"static_common\""
-    -D "PLATFORM_NAME=L\"${PLATFORM_NAME}\""
-    -D LIB_COMMON_EXPORT
+    -D "PROJECT_DIR=R\"!raw(${PROJECT_SOURCE_DIR})!raw\""
+    -D "PROJECT_NAME=\"${PROJECT_NAME}\""
+    -D "PLATFORM_NAME=\"${PLATFORM_NAME}\""
+    -D "TARGET_NAME=\"static_common\""
+    -D LIB_COMMON_STATIC
     -D LIB_STATIC
   >
 )

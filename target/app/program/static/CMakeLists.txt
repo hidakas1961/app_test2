@@ -24,10 +24,10 @@ target_include_directories(program PRIVATE
 # コンパイルオプション
 target_compile_definitions(program PRIVATE
   $<$<OR:$<COMPILE_LANGUAGE:C>,$<COMPILE_LANGUAGE:CXX>>:
-    -D "PROJECT_DIR=LR\"!raw(${PROJECT_SOURCE_DIR})!raw\""
-    -D "PROJECT_NAME=L\"${PROJECT_NAME}\""
-    -D "TARGET_NAME=L\"program\""
-    -D "PLATFORM_NAME=L\"${PLATFORM_NAME}\""
+    -D "PROJECT_DIR=R\"!raw(${PROJECT_SOURCE_DIR})!raw\""
+    -D "PROJECT_NAME=\"${PROJECT_NAME}\""
+    -D "PLATFORM_NAME=\"${PLATFORM_NAME}\""
+    -D "TARGET_NAME=\"program\""
     -D APP_STATIC
   >
 )
