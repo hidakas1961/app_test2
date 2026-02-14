@@ -46,13 +46,12 @@
 #   define CONFIG_NAME L"SharedApplication" ///< 構成の種類
 #elif defined(LIB_STATIC)
 #   define CONFIG_NAME L"StaticLibrary"      ///< 構成の種類
-#elif defined(LIB_DYNAMIC)
+#elif defined(LIB_SHARED)
 #   define CONFIG_NAME L"SharedLibrary"     ///< 構成の種類
 #else
-#   define CONFIG_NAME L"Unknown"            ///< 構成の種類
+#   define CONFIG_NAME L"Unknown"           ///< 構成の種類
 #endif
 
-#define TARGET_TYPE (CHAR_SET_NAME L"." PLATFORM_NAME L"." BUILD_TYPE L"." CONFIG_NAME) ///< ターゲット種別
-
-#define UNICODE_TEXT(x)   L#x             ///< ユニコード文字列化マクロ
-#define TWO_STAGE_TEXT(x) UNICODE_TEXT(x) ///< 二段階マクロ文字列化マクロ
+#define TARGET_TYPE       (CHAR_SET_NAME L"." PLATFORM_NAME L"." BUILD_TYPE L"." CONFIG_NAME) ///< ターゲット種別
+#define UNICODE_TEXT(x)   L#x                                                                 ///< ユニコード文字列化マクロ
+#define TWO_STAGE_TEXT(x) UNICODE_TEXT(x)                                                     ///< 二段階マクロ文字列化マクロ
