@@ -29,7 +29,7 @@ target_compile_definitions(shared_common PRIVATE
     -D "TARGET_NAME=L\"shared_common\""
     -D "PLATFORM_NAME=L\"${PLATFORM_NAME}\""
     -D LIB_COMMON_EXPORT
-    -D LIB_COMMON_SHARED
+    -D LIB_SHARED
   >
 )
 

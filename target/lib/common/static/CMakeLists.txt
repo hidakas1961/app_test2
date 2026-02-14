@@ -29,7 +29,7 @@ target_compile_definitions(static_common PRIVATE
     -D "TARGET_NAME=L\"static_common\""
     -D "PLATFORM_NAME=L\"${PLATFORM_NAME}\""
     -D LIB_COMMON_EXPORT
-    -D LIB_COMMON_SHARED
+    -D LIB_STATIC
   >
 )
 
