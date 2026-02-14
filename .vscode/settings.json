@@ -93,5 +93,5 @@
   "files.exclude": {
     "**/_build/**": true
   },
-  "git.untrackedChanges": "hidden"
+  "git.untrackedChanges": "mixed"
 }
