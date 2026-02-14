@@ -1,2 +1,6 @@
-_build
-_out
+_build/
+_out/
+!.github/
+!.vscode/
+!.test/
+
