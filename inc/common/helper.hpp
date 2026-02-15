@@ -29,6 +29,7 @@ namespace {
             char buffer[MAX_PATH]{};
             ::GetModuleFileNameA(hInstance, buffer, sizeof buffer/sizeof buffer[0]);
             // モジュール情報出力
+            ::SetConsoleOutputCP(CP_UTF8);
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("ターゲット種別：{}\n", TARGET_TYPE);
             std::cout << std::format("モジュールファイルパス：{}\n", buffer);
