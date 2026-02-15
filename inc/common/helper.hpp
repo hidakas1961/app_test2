@@ -29,17 +29,16 @@ namespace {
             char buffer[MAX_PATH]{};
             ::GetModuleFileNameA(hInstance, buffer, sizeof buffer/sizeof buffer[0]);
             // モジュール情報出力
-            ::SetConsoleOutputCP(CP_UTF8);
             std::cout << std::format("-------------------------------------------------------------------------------\n");
-            std::cout << std::format("ターゲット種別：{}\n", TARGET_TYPE);
-            std::cout << std::format("モジュールファイルパス：{}\n", buffer);
+            std::cout << std::format("ターゲット種別          ：{}\n", TARGET_TYPE);
+            std::cout << std::format("モジュールファイルパス  ：{}\n", buffer);
             std::cout << std::format("プロジェクトディレクトリ：{}\n", PROJECT_DIR);
-            std::cout << std::format("プロジェクト名：{}\n", PROJECT_NAME);
-            std::cout << std::format("ターゲット名：{}\n", TARGET_NAME);
-            std::cout << std::format("文字セット：{}\n", CHAR_SET_NAME);
-            std::cout << std::format("プラットフォーム：{}\n", PLATFORM_NAME);
-            std::cout << std::format("構成：{}\n", BUILD_TYPE);
-            std::cout << std::format("構成の種類：{}\n", CONFIG_NAME);
+            std::cout << std::format("プロジェクト名          ：{}\n", PROJECT_NAME);
+            std::cout << std::format("ターゲット名            ：{}\n", TARGET_NAME);
+            std::cout << std::format("文字セット              ：{}\n", CHAR_SET_NAME);
+            std::cout << std::format("プラットフォーム        ：{}\n", PLATFORM_NAME);
+            std::cout << std::format("構成                    ：{}\n", BUILD_TYPE);
+            std::cout << std::format("構成の種類              ：{}\n", CONFIG_NAME);
         } while (false);
     }
 }

@@ -32,6 +32,11 @@ namespace program {
         // 処理ブロック
         int result{0};
         do {
+            // コンソールコードページ設定
+            ::SetConsoleOutputCP(CP_UTF8);
+            // 関数情報出力
+            std::cout << std::format("-------------------------------------------------------------------------------\n");
+            std::cout << std::format("プログラムクラス：メイン関数\n");
             // モジュール情報出力
             ::OutputModuleInfo(hInstance);
             // 共通ライブラリクラスインスタンス取得
@@ -67,12 +72,9 @@ namespace app_test {
     AppTest::AppTest() noexcept {
         // 処理ブロック
         do {
-            // クラス情報出力
+            // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("テストアプリケーションクラス：コンストラクタ\n");
-            std::cout << std::format("-------------------------------------------------------------------------------\n");
-            std::cout << std::format("名前空間名：テストアプリケーション名前空間\n");
-            std::cout << std::format("クラス名：テストアプリケーションクラス\n");
         } while (false);
     }
 
@@ -81,7 +83,7 @@ namespace app_test {
     AppTest::~AppTest() noexcept {
         // 処理ブロック
         do {
-            // クラス情報出力
+            // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("テストアプリケーションクラス：デストラクタ\n");
         } while (false);

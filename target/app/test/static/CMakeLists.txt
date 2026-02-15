@@ -7,6 +7,8 @@ message(STATUS "ターゲット名：static_test")
 # ソースファイル
 add_executable(static_test
   ${PROJECT_SOURCE_DIR}/src/app/test/core/main.cpp
+  ${PROJECT_SOURCE_DIR}/res/app/test/resource.manifest
+  ${PROJECT_SOURCE_DIR}/res/app/test/resource.rc
 )
 
 #------------------------------------------------------------------------------

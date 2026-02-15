@@ -51,6 +51,8 @@ BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved) {
         if (DLL_PROCESS_ATTACH == dwReason) {
             // インスタンスハンドル取得
             s_hInstance = hInstance;
+            // コンソールコードページ設定
+            ::SetConsoleOutputCP(CP_UTF8);
             // DLL初期化関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("共通ライブラリ：DLL初期化関数：アタッチ\n");
@@ -94,11 +96,11 @@ namespace lib_common {
     LibCommon::LibCommon() noexcept {
         // 処理ブロック
         do {
-            // モジュール情報出力
-            ::OutputModuleInfo(s_hInstance);
-            // クラス情報出力
+            // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("共通ライブラリクラス：コンストラクタ\n");
+            // モジュール情報出力
+            ::OutputModuleInfo(s_hInstance);
         } while (false);
     }
 }

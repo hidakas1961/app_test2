@@ -31,11 +31,13 @@ namespace program {
         // 処理ブロック
         int result{0};
         do {
-            // モジュール情報出力
-            ::OutputModuleInfo(hInstance);
-            // クラス情報出力
+            // コンソールコードページ設定
+            ::SetConsoleOutputCP(CP_UTF8);
+            // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("プログラムクラス：メイン関数\n");
+            // モジュール情報出力
+            ::OutputModuleInfo(hInstance);
         } while (false);
 
         // 実行結果
