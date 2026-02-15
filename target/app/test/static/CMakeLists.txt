@@ -6,7 +6,7 @@ message(STATUS "ターゲット名：static_test")
 #------------------------------------------------------------------------------
 # ソースファイル
 add_executable(static_test
-  ${PROJECT_SOURCE_DIR}/src/app/test/core/main.cpp
+  ${PROJECT_SOURCE_DIR}/src/app/test/main.cpp
   ${PROJECT_SOURCE_DIR}/res/app/test/resource.manifest
   ${PROJECT_SOURCE_DIR}/res/app/test/resource.rc
 )
@@ -16,10 +16,6 @@ add_executable(static_test
 target_include_directories(static_test PRIVATE
   $<$<OR:$<COMPILE_LANGUAGE:C>,$<COMPILE_LANGUAGE:CXX>>:
     "${PROJECT_SOURCE_DIR}/inc"
-    "${PROJECT_SOURCE_DIR}/inc/common"
-    "${PROJECT_SOURCE_DIR}/inc/app"
-    "${PROJECT_SOURCE_DIR}/inc/app/program"
-    "${PROJECT_SOURCE_DIR}/inc/app/test"
   >
 )
 

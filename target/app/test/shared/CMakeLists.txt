@@ -6,7 +6,9 @@ message(STATUS "ターゲット名：shared_test")
 #------------------------------------------------------------------------------
 # ソースファイル
 add_executable(shared_test
-  ${PROJECT_SOURCE_DIR}/src/app/test/core/main.cpp
+  ${PROJECT_SOURCE_DIR}/src/app/test/main.cpp
+  ${PROJECT_SOURCE_DIR}/res/app/test/resource.manifest
+  ${PROJECT_SOURCE_DIR}/res/app/test/resource.rc
 )
 
 #------------------------------------------------------------------------------
@@ -14,10 +16,6 @@ add_executable(shared_test
 target_include_directories(shared_test PRIVATE
   $<$<OR:$<COMPILE_LANGUAGE:C>,$<COMPILE_LANGUAGE:CXX>>:
     "${PROJECT_SOURCE_DIR}/inc"
-    "${PROJECT_SOURCE_DIR}/inc/common"
-    "${PROJECT_SOURCE_DIR}/inc/app"
-    "${PROJECT_SOURCE_DIR}/inc/app/program"
-    "${PROJECT_SOURCE_DIR}/inc/app/test"
   >
 )
 
@@ -30,6 +28,7 @@ target_compile_definitions(shared_test PRIVATE
     -D "PLATFORM_NAME=\"${PLATFORM_NAME}\""
     -D "TARGET_NAME=\"shared_test\""
     -D APP_SHARED
+    -D LIB_COMMON_SHARED
   >
 )
 

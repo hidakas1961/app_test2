@@ -15,9 +15,6 @@ add_executable(program
 target_include_directories(program PRIVATE
   $<$<OR:$<COMPILE_LANGUAGE:C>,$<COMPILE_LANGUAGE:CXX>>:
     "${PROJECT_SOURCE_DIR}/inc"
-    "${PROJECT_SOURCE_DIR}/inc/common"
-    "${PROJECT_SOURCE_DIR}/inc/app"
-    "${PROJECT_SOURCE_DIR}/inc/app/program"
   >
 )
 

@@ -1,5 +1,5 @@
 #==============================================================================
-# シェアードテストアプリケーションCMakeリスト
+# シェアード共通ライブラリCMakeリスト
 #------------------------------------------------------------------------------
 message(STATUS "ターゲット名：shared_common")
 
@@ -14,9 +14,6 @@ add_library(shared_common SHARED
 target_include_directories(shared_common PRIVATE
   $<$<OR:$<COMPILE_LANGUAGE:C>,$<COMPILE_LANGUAGE:CXX>>:
     "${PROJECT_SOURCE_DIR}/inc"
-    "${PROJECT_SOURCE_DIR}/inc/common"
-    "${PROJECT_SOURCE_DIR}/inc/lib"
-    "${PROJECT_SOURCE_DIR}/inc/lib/common"
   >
 )
 
