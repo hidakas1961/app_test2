@@ -29,6 +29,8 @@ target_compile_definitions(shared_test PRIVATE
     -D "TARGET_NAME=\"shared_test\""
     -D APP_SHARED
     -D LIB_COMMON_SHARED
+    -D LIB_CONSOLE_SHARED
+    -D LIB_WINDOW_SHARED
   >
 )
 
@@ -38,7 +40,12 @@ set_target_properties(shared_test PROPERTIES OUTPUT_NAME "test")
 
 #------------------------------------------------------------------------------
 # リンクファイル
+target_link_libraries(shared_test PRIVATE shared_lib_app_test_common)
+target_link_libraries(shared_test PRIVATE shared_lib_app_test_console)
+target_link_libraries(shared_test PRIVATE shared_lib_app_test_window)
 target_link_libraries(shared_test PRIVATE shared_common)
+target_link_libraries(shared_test PRIVATE shared_console)
+target_link_libraries(shared_test PRIVATE shared_window)
 
 #------------------------------------------------------------------------------
 # その他

@@ -54,8 +54,28 @@ message(STATUS "CMAKE_LIBRARY_OUTPUT_DIRECTORY：${CMAKE_LIBRARY_OUTPUT_DIRECTOR
 add_subdirectory("${PROJECT_SOURCE_DIR}/target/lib/common/static")
 
 #------------------------------------------------------------------------------
+# スタティックコンソールライブラリターゲット追加
+add_subdirectory("${PROJECT_SOURCE_DIR}/target/lib/console/static")
+
+#------------------------------------------------------------------------------
+# スタティックウィンドウライブラリターゲット追加
+add_subdirectory("${PROJECT_SOURCE_DIR}/target/lib/window/static")
+
+#------------------------------------------------------------------------------
 # スタティックプログラムターゲット追加
 add_subdirectory("${PROJECT_SOURCE_DIR}/target/app/program/static")
+
+#------------------------------------------------------------------------------
+# スタティックテストアプリケーション共通ライブラリターゲット追加
+add_subdirectory("${PROJECT_SOURCE_DIR}/target/lib/app/test/common/static")
+
+#------------------------------------------------------------------------------
+# スタティックテストアプリケーションコンソールライブラリターゲット追加
+add_subdirectory("${PROJECT_SOURCE_DIR}/target/lib/app/test/console/static")
+
+#------------------------------------------------------------------------------
+# スタティックテストアプリケーションウィンドウライブラリターゲット追加
+add_subdirectory("${PROJECT_SOURCE_DIR}/target/lib/app/test/window/static")
 
 #------------------------------------------------------------------------------
 # スタティックテストアプリケーションターゲット追加
@@ -77,6 +97,26 @@ message(STATUS "CMAKE_LIBRARY_OUTPUT_DIRECTORY：${CMAKE_LIBRARY_OUTPUT_DIRECTOR
 #------------------------------------------------------------------------------
 # シェアード共通ライブラリターゲット追加
 add_subdirectory("${PROJECT_SOURCE_DIR}/target/lib/common/shared")
+
+#------------------------------------------------------------------------------
+# シェアードコンソールライブラリターゲット追加
+add_subdirectory("${PROJECT_SOURCE_DIR}/target/lib/console/shared")
+
+#------------------------------------------------------------------------------
+# シェアードウィンドウライブラリターゲット追加
+add_subdirectory("${PROJECT_SOURCE_DIR}/target/lib/window/shared")
+
+#------------------------------------------------------------------------------
+# シェアードテストアプリケーション共通ライブラリターゲット追加
+add_subdirectory("${PROJECT_SOURCE_DIR}/target/lib/app/test/common/shared")
+
+#------------------------------------------------------------------------------
+# シェアードテストアプリケーションコンソールライブラリターゲット追加
+add_subdirectory("${PROJECT_SOURCE_DIR}/target/lib/app/test/console/shared")
+
+#------------------------------------------------------------------------------
+# シェアードテストアプリケーションウィンドウライブラリターゲット追加
+add_subdirectory("${PROJECT_SOURCE_DIR}/target/lib/app/test/window/shared")
 
 #------------------------------------------------------------------------------
 # シェアードテストアプリケーションターゲット追加

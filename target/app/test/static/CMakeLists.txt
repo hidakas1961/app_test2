@@ -29,6 +29,8 @@ target_compile_definitions(static_test PRIVATE
     -D "TARGET_NAME=\"static_test\""
     -D APP_STATIC
     -D LIB_COMMON_STATIC
+    -D LIB_CONSOLE_STATIC
+    -D LIB_WINDOW_STATIC
   >
 )
 
@@ -38,7 +40,12 @@ set_target_properties(static_test PROPERTIES OUTPUT_NAME "test")
 
 #------------------------------------------------------------------------------
 # リンクファイル
+target_link_libraries(static_test PRIVATE static_lib_app_test_common)
+target_link_libraries(static_test PRIVATE static_lib_app_test_console)
+target_link_libraries(static_test PRIVATE static_lib_app_test_window)
 target_link_libraries(static_test PRIVATE static_common)
+target_link_libraries(static_test PRIVATE static_console)
+target_link_libraries(static_test PRIVATE static_window)
 
 #------------------------------------------------------------------------------
 # その他

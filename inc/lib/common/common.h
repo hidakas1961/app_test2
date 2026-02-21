@@ -118,7 +118,7 @@ namespace lib_common {
         ///
         /// @param     なし
         /// @return    なし
-        /// @attention なし
+        /// @attention この関数を削除しました。
         //---------------------------------------------------------------------
         ~LibCommon() = delete;
     };
