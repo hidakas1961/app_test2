@@ -11,12 +11,27 @@
 // インクルードファイル
 //-----------------------------------------------------------------------------
 #include "app/test/test.h"
+#include "app/test/common/common.h"
+#include "app/test/console/console.h"
+#include "app/test/window/window.h"
 #include "lib/common/common.h"
+#include "lib/console/console.h"
+#include "lib/window/window.h"
 
 //=============================================================================
 // インクルード実装ファイル
 //-----------------------------------------------------------------------------
 #include "app/program/program.hpp"
+
+//=============================================================================
+// 無名名前空間
+//-----------------------------------------------------------------------------
+namespace {
+    //=========================================================================
+    // ファイルスコープローカル変数
+    //-------------------------------------------------------------------------
+    HINSTANCE s_hInstance{}; ///< インスタンスハンドル
+}
 
 //=============================================================================
 // プログラム名前空間
@@ -32,15 +47,19 @@ namespace program {
         // 処理ブロック
         int result{0};
         do {
+            // インスタンスハンドル取得
+            s_hInstance = hInstance;
             // コンソールコードページ設定
             ::SetConsoleOutputCP(CP_UTF8);
             // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("プログラムクラス：メイン関数\n");
-            // モジュール情報出力
-            ::OutputModuleInfo(hInstance);
             // 共通ライブラリクラスインスタンス取得
             LibCommon::GetInstance();
+            // コンソールライブラリクラスインスタンス取得
+            LibConsole::GetInstance();
+            // ウィンドウライブラリクラスインスタンス取得
+            LibWindow::GetInstance();
             // テストアプリケーションクラスインスタンス取得
             AppTest::GetInstance();
         } while (false);
@@ -75,6 +94,14 @@ namespace app_test {
             // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("テストアプリケーションクラス：コンストラクタ\n");
+            // モジュール情報出力
+            ::OutputModuleInfo(s_hInstance);
+            // テストアプリケーション共通ライブラリクラスインスタンス取得
+            LibAppTestCommon::GetInstance();
+            // テストアプリケーションコンソールライブラリクラスインスタンス取得
+            LibAppTestConsole::GetInstance();
+            // テストアプリケーションウィンドウライブラリクラスインスタンス取得
+            LibAppTestWindow::GetInstance();
         } while (false);
     }
 
