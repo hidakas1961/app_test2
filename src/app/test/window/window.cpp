@@ -13,11 +13,6 @@
 #include "app/test/window/window.h"
 
 //=============================================================================
-// インクルード実装ファイル
-//-----------------------------------------------------------------------------
-#include "common/common.hpp"
-
-//=============================================================================
 // テストアプリケーション名前空間
 //-----------------------------------------------------------------------------
 namespace app_test {
@@ -27,17 +22,19 @@ namespace app_test {
     // 公開構築子と解体子
     //-------------------------------------------------------------------------
     // コンストラクタ
-    LibAppTestWindow::LibAppTestWindow() noexcept:
+    LibAppTestWindow::LibAppTestWindow(Node* pcParent) noexcept:
         // 基底クラスコンストラクタ
-        LibWindow{}
+        LibWindow(pcParent)
     {
         // 処理ブロック
         do {
             // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("テストアプリケーションウィンドウライブラリクラス：コンストラクタ\n");
+            std::cout << std::format("ノード名：{}\n", getName());
+            std::cout << std::format("JSONパス：{}\n", getJsonPointer());
             // モジュール情報出力
-            ::OutputModuleInfo(nullptr);
+            common::OutputModuleInfo(nullptr);
         } while (false);
     }
 

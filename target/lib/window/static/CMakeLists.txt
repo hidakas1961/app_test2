@@ -41,5 +41,5 @@ set(CMAKE_SHARED_LIBRARY_PREFIX "")
 set(CMAKE_IMPORT_LIBRARY_PREFIX "")
 add_custom_command(TARGET static_window POST_BUILD
     COMMAND powershell -NoProfile -Command 
-        "[Window]::OutputEncoding = [System.Text.Encoding]::UTF8; echo 'ターゲットファイルパス：$<TARGET_FILE:static_window>'"
+        "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; echo 'ターゲットファイルパス：$<TARGET_FILE:static_window>'"
 )
