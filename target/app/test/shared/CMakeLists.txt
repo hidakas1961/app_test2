@@ -48,6 +48,11 @@ target_link_libraries(shared_test PRIVATE shared_console)
 target_link_libraries(shared_test PRIVATE shared_window)
 
 #------------------------------------------------------------------------------
+# link
+# target_include_directories(shared_test PRIVATE nlohmann_json::nlohmann_json)
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
 # その他
 set(CMAKE_STATIC_LIBRARY_PREFIX "")
 set(CMAKE_SHARED_LIBRARY_PREFIX "")

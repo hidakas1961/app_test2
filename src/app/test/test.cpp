@@ -16,6 +16,40 @@
 // インクルード実装ファイル
 //-----------------------------------------------------------------------------
 #include "app/program/program.hpp"
+#include "nlohmann/json.hpp"
+
+using json = nlohmann::json;
+
+namespace {
+    void foo() {
+        // 1. JSONオブジェクトの作成
+        json j;
+        j["name"] = "Taro";
+        j["age"] = 25;
+        j["is_student"] = false;
+        j["skills"] = {"C++", "Python", "CMake"}; // 配列も直感的
+
+        // 2. 文字列からJSONをパース（解析）
+        std::string raw_data = R"({"city": "Tokyo", "population": 14000000})";
+        json j_from_string = json::parse(raw_data);
+
+        // 3. データのマージ
+        j.update(j_from_string);
+
+        // 4. 値の取得
+        // 型を指定して取得（存在しないキーだと例外を投げる）
+        std::string name = j.at("name").get<std::string>();
+        // デフォルト値を指定して安全に取得
+        int score = j.value("score", 0); 
+
+        // 5. JSONの出力
+        std::cout << "--- Standard Output ---" << std::endl;
+        std::cout << j.dump() << std::endl;
+
+        std::cout << "\n--- Pretty Print (Indent: 4) ---" << std::endl;
+        std::cout << j.dump(4) << std::endl;
+    }
+}
 
 //=============================================================================
 // プログラム名前空間
@@ -40,6 +74,13 @@ namespace program {
             common::OutputModuleInfo(nullptr);
             // テストアプリケーションクラスインスタンス取得
             app_test::AppTest::getInstance();
+            // jsonテスト
+            try {
+                foo();
+            } catch (...) {
+                // あらゆる例外（JSONエラー、メモリ不足、標準例外など）をここで受ける
+                std::cerr << "何らかのエラーが発生しました。" << std::endl;
+            }
         } while (false);
 
         // 実行結果
