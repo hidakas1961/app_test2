@@ -6,7 +6,7 @@ message(STATUS "ターゲット名：program")
 #------------------------------------------------------------------------------
 # ソースファイル
 add_executable(program
-  ${PROJECT_SOURCE_DIR}/src/app/program/main.cpp
+  ${PROJECT_SOURCE_DIR}/src/app/program/program.cpp
   ${PROJECT_SOURCE_DIR}/res/app/program/resource.manifest
 )
 
