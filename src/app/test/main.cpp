@@ -55,13 +55,13 @@ namespace program {
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("プログラムクラス：メイン関数\n");
             // 共通ライブラリクラスインスタンス取得
-            LibCommon::GetInstance();
+            // lib_common::LibCommon::GetInstance();
             // コンソールライブラリクラスインスタンス取得
-            LibConsole::GetInstance();
+            // lib_console::LibConsole::GetInstance();
             // ウィンドウライブラリクラスインスタンス取得
-            LibWindow::GetInstance();
+            // lib_window::LibWindow::GetInstance();
             // テストアプリケーションクラスインスタンス取得
-            AppTest::GetInstance();
+            app_test::AppTest::GetInstance();
         } while (false);
 
         // 実行結果

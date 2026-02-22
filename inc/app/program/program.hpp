@@ -43,7 +43,7 @@ int wmain(int argc, wchar_t* argv[]) {
         HMODULE hInstance = ::GetModuleHandleW(nullptr);
 
         // メイン関数を実行
-        result = Program::Main(hInstance);
+        result = program::Program::Main(hInstance);
     } while (false);
 
     // 実行結果
@@ -67,7 +67,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     int result{ -1 };
     do {
         // メイン関数を実行
-        result = Program::Main(hInstance);
+        result = program::Program::Main(hInstance);
     } while (false);
 
     // 実行結果
@@ -94,7 +94,7 @@ int main(int argc, char* argv[]) {
         HMODULE hInstance = ::GetModuleHandleW(nullptr);
 
         // メイン関数を実行
-        result = Program::Main(hInstance);
+        result = program::Program::Main(hInstance);
     } while (false);
 
     // 実行結果
@@ -118,7 +118,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     int result{ -1 };
     do {
         // メイン関数を実行
-        result = Program::Main(hInstance);
+        result = program::Program::Main(hInstance);
     } while (false);
 
     // 実行結果

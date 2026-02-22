@@ -36,7 +36,10 @@ namespace app_test {
     // 非公開構築子と解体子
     //-------------------------------------------------------------------------
     // コンストラクタ
-    LibAppTestWindow::LibAppTestWindow() noexcept {
+    LibAppTestWindow::LibAppTestWindow() noexcept:
+        // 基底クラスコンストラクタ
+        LibWindow{}
+    {
         // 処理ブロック
         do {
             // 関数情報出力

@@ -36,7 +36,10 @@ namespace app_test {
     // 非公開構築子と解体子
     //-------------------------------------------------------------------------
     // コンストラクタ
-    LibAppTestCommon::LibAppTestCommon() noexcept {
+    LibAppTestCommon::LibAppTestCommon() noexcept:
+        // 基底クラスコンストラクタ
+        LibCommon{}
+    {
         // 処理ブロック
         do {
             // 関数情報出力
