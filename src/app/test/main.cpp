@@ -14,9 +14,6 @@
 #include "app/test/common/common.h"
 #include "app/test/console/console.h"
 #include "app/test/window/window.h"
-#include "lib/common/common.h"
-#include "lib/console/console.h"
-#include "lib/window/window.h"
 
 //=============================================================================
 // インクルード実装ファイル
@@ -54,12 +51,6 @@ namespace program {
             // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("プログラムクラス：メイン関数\n");
-            // 共通ライブラリクラスインスタンス取得
-            // lib_common::LibCommon::GetInstance();
-            // コンソールライブラリクラスインスタンス取得
-            // lib_console::LibConsole::GetInstance();
-            // ウィンドウライブラリクラスインスタンス取得
-            // lib_window::LibWindow::GetInstance();
             // テストアプリケーションクラスインスタンス取得
             app_test::AppTest::GetInstance();
         } while (false);
