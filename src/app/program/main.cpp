@@ -27,6 +27,7 @@ namespace program {
     // 静的公開関数
     //-------------------------------------------------------------------------
     // メイン関数
+    // @cond
     int Program::Main(HINSTANCE hInstance) noexcept {
         // 処理ブロック
         int result{0};
@@ -43,4 +44,5 @@ namespace program {
         // 実行結果
         return result;
     }
+    // @encode
 }
