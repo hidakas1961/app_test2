@@ -12,7 +12,8 @@
 //=============================================================================
 // インクルードファイル
 //-----------------------------------------------------------------------------
-#include "app/program/program.h"
+#include "common/common.h"
+#include "common/node.h"
 #include "app/test/common/common.h"
 #include "app/test/console/console.h"
 #include "app/test/window/window.h"

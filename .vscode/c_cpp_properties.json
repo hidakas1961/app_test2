@@ -4,8 +4,8 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:\\opencv-4.13.0\\build\\install\\include",
-                "C:\\msys64\\mingw64\\include"
+                "C:/opencv-4.13.0/build/install/include",
+                "C:/msys64/mingw64/include"
             ],
             "windowsSdkVersion": "10.0.26100.0",
             "compilerPath": "cl.exe",

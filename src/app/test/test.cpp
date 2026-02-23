@@ -11,43 +11,98 @@
 // インクルードファイル
 //-----------------------------------------------------------------------------
 #include "app/test/test.h"
+#include <iostream>
+#include <fstream>
 
 //=============================================================================
 // インクルード実装ファイル
 //-----------------------------------------------------------------------------
 #include "app/program/program.hpp"
-#include "nlohmann/json.hpp"
+#include <nlohmann/json.hpp>
 
+//=============================================================================
+// 型定義
+//-----------------------------------------------------------------------------
 using json = nlohmann::json;
 
+//=============================================================================
+/// 無名名前空間
+///
+/// 無名名前空間です。
+///
+/// @attention なし
+//-----------------------------------------------------------------------------
 namespace {
-    void foo() {
-        // 1. JSONオブジェクトの作成
-        json j;
-        j["name"] = "Taro";
-        j["age"] = 25;
-        j["is_student"] = false;
-        j["skills"] = {"C++", "Python", "CMake"}; // 配列も直感的
+    //=========================================================================
+    // ファイルスコープローカル変数
+    //-------------------------------------------------------------------------
+    json s_cJsonConfig; ///< JSON構成情報
 
-        // 2. 文字列からJSONをパース（解析）
-        std::string raw_data = R"({"city": "Tokyo", "population": 14000000})";
-        json j_from_string = json::parse(raw_data);
+    //=========================================================================
+    // ファイルスコープローカル関数
+    //-------------------------------------------------------------------------
+    /// JSON構成情報出力関数
+    ///
+    /// JSON構成情報出力です。
+    ///
+    /// @param     なし
+    /// @return    なし
+    /// @attention なし
+    //-------------------------------------------------------------------------
+    void outputJsonConfig() {
+        do {
+            std::cout << std::format("-------------------------------------------------------------------------------\n");
+            std::cout << std::format("JSON構成情報出力関数\n");
 
-        // 3. データのマージ
-        j.update(j_from_string);
+            // app_test::AppTest& rcAppTest{app_test::AppTest::getInstance()};
+            // std::string strPath{rcAppTest.getJsonPointer()};
+            // nlohmann::json::json_pointer jsonPath(strPath);
+            for (auto& [key, value] : s_cJsonConfig.items()) {
+                // std::cout << "名前: " << key << ", 値: " << value << std::endl;
+            }
+            std::cout << s_cJsonConfig.dump(2) << std::endl;
+            std::ofstream outFile("config.json");
+            outFile << s_cJsonConfig.dump(2);
+        } while (false);
+    }
 
-        // 4. 値の取得
-        // 型を指定して取得（存在しないキーだと例外を投げる）
-        std::string name = j.at("name").get<std::string>();
-        // デフォルト値を指定して安全に取得
-        int score = j.value("score", 0); 
+    //-------------------------------------------------------------------------
+    /// JSONテスト関数
+    ///
+    /// JSONテスト関数です。
+    ///
+    /// @param     なし
+    /// @return    なし
+    /// @attention なし
+    //-------------------------------------------------------------------------
+    void testJson() {
+        // 処理ブロック
+        do {
+            std::cout << std::format("-------------------------------------------------------------------------------\n");
+            std::cout << std::format("JSONテスト関数\n");
 
-        // 5. JSONの出力
-        std::cout << "--- Standard Output ---" << std::endl;
-        std::cout << j.dump() << std::endl;
-
-        std::cout << "\n--- Pretty Print (Indent: 4) ---" << std::endl;
-        std::cout << j.dump(4) << std::endl;
+            // 1. JSONオブジェクトの作成
+            json j;
+            j["name"] = "Taro";
+            j["age"] = 25;
+            j["is_student"] = false;
+            j["skills"] = {"C++", "Python", "CMake"}; // 配列も直感的
+            // 2. 文字列からJSONをパース（解析）
+            std::string raw_data = R"({"city": "Tokyo", "population": 14000000})";
+            json j_from_string = json::parse(raw_data);
+            // 3. データのマージ
+            j.update(j_from_string);
+            // 4. 値の取得
+            // 型を指定して取得（存在しないキーだと例外を投げる）
+            std::string name = j.at("name").get<std::string>();
+            // デフォルト値を指定して安全に取得
+            int score = j.value("score", 0); 
+            // 5. JSONの出力
+            std::cout << "--- Standard Output ---" << std::endl;
+            std::cout << j.dump() << std::endl;
+            std::cout << "\n--- Pretty Print (Indent: 4) ---" << std::endl;
+            std::cout << j.dump(4) << std::endl;
+        } while (false);
     }
 }
 
@@ -67,20 +122,33 @@ namespace program {
         do {
             // コンソールコードページ設定
             ::SetConsoleOutputCP(CP_UTF8);
+            // jsonテスト
+            try {
+                testJson();
+            }
+            catch (...) {
+                // あらゆる例外（JSONエラー、メモリ不足、標準例外など）をここで受ける
+                std::cerr << "何らかのエラーが発生しました。" << std::endl;
+            }
             // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("プログラムクラス：メイン関数\n");
             // モジュール情報出力
-            common::OutputModuleInfo(nullptr);
+            common::OutputModuleInfo(hInstance);
             // テストアプリケーションクラスインスタンス取得
             app_test::AppTest::getInstance();
-            // jsonテスト
-            try {
-                foo();
-            } catch (...) {
-                // あらゆる例外（JSONエラー、メモリ不足、標準例外など）をここで受ける
-                std::cerr << "何らかのエラーが発生しました。" << std::endl;
-            }
+            // JSON構成情報設定
+            json j;
+            j[0] = 0;
+            j[1] = 1;
+            j[2] = 2;
+            j[3] = 3;
+            app_test::AppTest& rcAppTest{app_test::AppTest::getInstance()};
+            std::string strPath{rcAppTest.getJsonPointer()};
+            nlohmann::json::json_pointer jsonPath(strPath);
+            s_cJsonConfig[jsonPath] = j;
+            // JSON構成情報出力
+            outputJsonConfig();
         } while (false);
 
         // 実行結果
