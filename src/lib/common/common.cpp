@@ -13,6 +13,11 @@
 #include "lib/common/common.h"
 
 //=============================================================================
+// インクルード実装ファイル
+//-----------------------------------------------------------------------------
+#include "common/common.hpp"
+
+//=============================================================================
 // 無名名前空間
 //-----------------------------------------------------------------------------
 namespace {
@@ -91,7 +96,7 @@ namespace lib_common {
             std::cout << std::format("ノード名：{}\n", getName());
             std::cout << std::format("JSONパス：{}\n", getJsonPointer());
             // モジュール情報出力
-            common::OutputModuleInfo(s_hInstance);
+            OutputModuleInfo(s_hInstance);
         } while (false);
     }
 

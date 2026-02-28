@@ -13,6 +13,11 @@
 #include "app/test/window/window.h"
 
 //=============================================================================
+// インクルード実装ファイル
+//-----------------------------------------------------------------------------
+#include "common/common.hpp"
+
+//=============================================================================
 // テストアプリケーション名前空間
 //-----------------------------------------------------------------------------
 namespace app_test {
@@ -34,7 +39,7 @@ namespace app_test {
             std::cout << std::format("ノード名：{}\n", getName());
             std::cout << std::format("JSONパス：{}\n", getJsonPointer());
             // モジュール情報出力
-            common::OutputModuleInfo(nullptr);
+            OutputModuleInfo(nullptr);
         } while (false);
     }
 

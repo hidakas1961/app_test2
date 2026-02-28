@@ -5,7 +5,7 @@ message(STATUS "ターゲット名：shared_lib_app_test_common")
 
 #------------------------------------------------------------------------------
 # ソースファイル
-add_library(shared_lib_app_test_common
+add_library(shared_lib_app_test_common STATIC
   ${PROJECT_SOURCE_DIR}/src/app/test/common/common.cpp
 )
 
@@ -43,5 +43,5 @@ set(CMAKE_SHARED_LIBRARY_PREFIX "")
 set(CMAKE_IMPORT_LIBRARY_PREFIX "")
 add_custom_command(TARGET shared_lib_app_test_common POST_BUILD
     COMMAND powershell -NoProfile -Command 
-        "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; echo 'ターゲットファイルパス：$<TARGET_FILE:shared_lib_app_test_common>'"
+        "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; echo 'ABCターゲットファイルパス：$<TARGET_FILE:shared_lib_app_test_common>'"
 )

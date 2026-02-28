@@ -10,11 +10,51 @@
 #pragma once
 
 //=============================================================================
-// インクルードファイル
+// マクロ定義
 //-----------------------------------------------------------------------------
-#include "common/common_def.h"
-#include <windows.h>
-#include <iostream>
+#ifndef PROJECT_DIR
+#   define PROJECT_DIR "Unknown" ///< プロジェクトディレクトリ
+#endif
+
+#ifndef PROJECT_NAME
+#   define PROJECT_NAME "Unknown" ///< プロジェクト名
+#endif
+
+#ifndef TARGET_NAME
+#   define TARGET_NAME "Unknown" ///< ターゲット名
+#endif
+
+#ifndef PLATFORM_NAME
+#   define PLATFORM_NAME "Unknown" ///< プラットフォーム
+#endif
+
+#ifdef NDEBUG
+#   define BUILD_TYPE "Release" ///< 構成
+#else
+#   define BUILD_TYPE "Debug"   ///< 構成
+#endif
+
+#ifdef _UNICODE
+#   define CHAR_SET_NAME "Unicode" ///< 文字セット
+#else
+#   define CHAR_SET_NAME "Ansi"    ///< 文字セット
+#endif
+
+#if defined(APP_STATIC)
+#   define CONFIG_NAME "StaticApplication"  ///< 構成の種類
+#elif defined(APP_SHARED)
+#   define CONFIG_NAME "SharedApplication" ///< 構成の種類
+#elif defined(LIB_STATIC)
+#   define CONFIG_NAME "StaticLibrary"      ///< 構成の種類
+#elif defined(LIB_SHARED)
+#   define CONFIG_NAME "SharedLibrary"     ///< 構成の種類
+#else
+#   define CONFIG_NAME "Unknown"           ///< 構成の種類
+#endif
+
+#define TARGET_TYPE       (CHAR_SET_NAME "." PLATFORM_NAME "." BUILD_TYPE "." CONFIG_NAME) ///< ターゲット種別
+#define TO_TEXT(x)        #x                                                               ///< 文字列化マクロ
+#define TWO_STAGE_TEXT(x) TO_TEXT(x)                                                       ///< 二段階マクロ文字列化マクロ
 
 //=============================================================================
 /// 共通名前空間
@@ -23,35 +63,4 @@
 ///
 /// @attention なし
 //-----------------------------------------------------------------------------
-namespace common {
-    //=========================================================================
-    // インライングローバル関数
-    //-------------------------------------------------------------------------
-    /// モジュール情報出力関数
-    ///
-    /// モジュール情報出力関数です。
-    ///
-    /// @param[in] hInstance インスタンスハンドル
-    /// @return    なし
-    /// @attention なし
-    //-------------------------------------------------------------------------
-    inline void OutputModuleInfo(HINSTANCE hInstance) noexcept {
-        // 処理ブロック
-        do {
-            // モジュールファイルパス取得
-            char buffer[MAX_PATH]{};
-            ::GetModuleFileNameA(hInstance, buffer, sizeof buffer/sizeof buffer[0]);
-            // モジュール情報出力
-            std::cout << std::format("-------------------------------------------------------------------------------\n");
-            std::cout << std::format("ターゲット種別          ：{}\n", TARGET_TYPE);
-            std::cout << std::format("モジュールファイルパス  ：{}\n", buffer);
-            std::cout << std::format("プロジェクトディレクトリ：{}\n", PROJECT_DIR);
-            std::cout << std::format("プロジェクト名          ：{}\n", PROJECT_NAME);
-            std::cout << std::format("ターゲット名            ：{}\n", TARGET_NAME);
-            std::cout << std::format("文字セット              ：{}\n", CHAR_SET_NAME);
-            std::cout << std::format("プラットフォーム        ：{}\n", PLATFORM_NAME);
-            std::cout << std::format("構成                    ：{}\n", BUILD_TYPE);
-            std::cout << std::format("構成の種類              ：{}\n", CONFIG_NAME);
-        } while (false);
-    }
-}
+namespace common {}

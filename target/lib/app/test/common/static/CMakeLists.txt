@@ -5,7 +5,7 @@ message(STATUS "ターゲット名：static_lib_app_test_common")
 
 #------------------------------------------------------------------------------
 # ソースファイル
-add_library(static_lib_app_test_common
+add_library(static_lib_app_test_common STATIC
   ${PROJECT_SOURCE_DIR}/src/app/test/common/common.cpp
 )
 
