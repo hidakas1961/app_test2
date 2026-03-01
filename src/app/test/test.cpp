@@ -12,6 +12,8 @@
 //-----------------------------------------------------------------------------
 #include "app/test/test.h"
 #include "lib/common/config.h"
+#include <iostream>
+#include <fstream>
 
 //=============================================================================
 // インクルード実装ファイル
@@ -19,6 +21,61 @@
 #include "common/common.hpp"
 #include "common/node.hpp"
 #include "app/program/program.hpp"
+#include <nlohmann/json.hpp>
+
+//=============================================================================
+/// 無名名前空間
+///
+/// 無名名前空間です。
+///
+/// @attention なし
+//-----------------------------------------------------------------------------
+namespace {
+    //=========================================================================
+    // ファイルスコープローカル関数
+    //-------------------------------------------------------------------------
+    /// JSON構成情報出力関数
+    ///
+    /// JSON構成情報出力です。
+    ///
+    /// @param[in] rcJson JSONクラス参照
+    /// @return    なし
+    /// @attention なし
+    //-------------------------------------------------------------------------
+    void outJson(json& rcJson) {
+        do {
+            std::cout << std::format("-------------------------------------------------------------------------------\n");
+            std::cout << std::format("JSON構成情報出力関数\n");
+            std::cout << rcJson.dump(2) << std::endl;
+            std::ofstream outFile("config.json");
+            outFile << rcJson.dump(2);
+        } while (false);
+    }
+
+    //-------------------------------------------------------------------------
+    /// JSONテスト関数
+    ///
+    /// JSONテスト関数です。
+    ///
+    /// @param[in] rcJson JSONクラス参照
+    /// @param[in] rcNode ノードクラス参照
+    /// @return    なし
+    /// @attention なし
+    //-------------------------------------------------------------------------
+    void testJson(json& rcJson, common::Node& rcNode) {
+        // 処理ブロック
+        do {
+            std::cout << std::format("-------------------------------------------------------------------------------\n");
+            std::cout << std::format("JSONテスト関数\n");
+            // JSON構成情報設定
+            std::string strPath{rcNode.getJsonPointer()+"/Test"};
+            nlohmann::json::json_pointer jsonPath(strPath);
+            rcJson[jsonPath] = "Hello World.";
+            // JSON構成情報出力
+            outJson(rcJson);
+        } while (false);
+    }
+}
 
 //=============================================================================
 // プログラム名前空間
@@ -42,7 +99,11 @@ namespace program {
             // モジュール情報出力
             OutputModuleInfo(hInstance);
             // テストアプリケーションクラスインスタンス取得
-            app_test::AppTest::getInstance();
+            app_test::AppTest& rcAppTest{app_test::AppTest::getInstance()};
+            // テストアプリケーションクラス初期化
+            rcAppTest.init();
+            // テストアプリケーションクラス終了
+            rcAppTest.finish();
         } while (false);
 
         // 実行結果
@@ -90,7 +151,52 @@ namespace app_test {
     //-------------------------------------------------------------------------
     // インスタンス取得関数
     AppTest& AppTest::getInstance() noexcept {
-        static AppTest s_cInstance; ///< テストアプリケーションクラスインスタンス
+        static AppTest s_cInstance{}; ///< テストアプリケーションクラスインスタンス
         return s_cInstance;
+    }
+
+    //=========================================================================
+    // 動的公開関数
+    //-------------------------------------------------------------------------
+    // 初期化関数
+    void AppTest::init() noexcept
+    {
+        // 処理ブロック
+        do {
+            // 関数情報出力
+            std::cout << std::format("-------------------------------------------------------------------------------\n");
+            std::cout << std::format("テストアプリケーションクラス：初期化関数\n");
+
+            // JSONテスト
+            LibAppTestCommon&   rcLibCommon{getLibCommon()};
+            lib_common::Config& rcConfig   {rcLibCommon.getConfig()};
+            json&               rcJson     {rcConfig.getJson()};
+            testJson(rcJson, *this);
+
+            // テストアプリケーション共通ライブラリクラス初期化
+            m_cLibCommon.init();
+            // テストアプリケーションコンソールライブラリクラス初期化
+            m_cLibConsole.init();
+            // テストアプリケーションウィンドウライブラリクラス初期化
+            m_cLibWindow.init();
+        } while (false);
+    }
+
+    //-------------------------------------------------------------------------
+    // 終了関数
+    void AppTest::finish() noexcept
+    {
+        // 処理ブロック
+        do {
+            // 関数情報出力
+            std::cout << std::format("-------------------------------------------------------------------------------\n");
+            std::cout << std::format("テストアプリケーションクラス：終了関数\n");
+            // テストアプリケーションウィンドウライブラリクラス終了
+            m_cLibWindow.finish();
+            // テストアプリケーションコンソールライブラリクラス終了
+            m_cLibConsole.finish();
+            // テストアプリケーション共通ライブラリクラス終了
+            m_cLibCommon.finish();
+        } while (false);
     }
 }

@@ -11,6 +11,8 @@
 // インクルードファイル
 //-----------------------------------------------------------------------------
 #include "app/test/common/common.h"
+#include "app/test/test.h"
+#include "lib/common/config.h"
 #include <iostream>
 #include <fstream>
 
@@ -29,35 +31,23 @@
 //-----------------------------------------------------------------------------
 namespace {
     //=========================================================================
-    // ファイルスコープローカル変数
-    //-------------------------------------------------------------------------
-    json s_cJsonConfig; ///< JSON構成情報
-
-    //=========================================================================
     // ファイルスコープローカル関数
     //-------------------------------------------------------------------------
     /// JSON構成情報出力関数
     ///
     /// JSON構成情報出力です。
     ///
-    /// @param     なし
+    /// @param[in] rcJson JSONクラス参照
     /// @return    なし
     /// @attention なし
     //-------------------------------------------------------------------------
-    void outputJsonConfig() {
+    void outJson(json& rcJson) {
         do {
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("JSON構成情報出力関数\n");
-
-            // lib_common::Config& rcConfig{lib_common::Config::getInstance()};
-            // std::string strPath{rcConfig.getJsonPointer()};
-            // nlohmann::json::json_pointer jsonPath(strPath);
-            for (auto& [key, value] : s_cJsonConfig.items()) {
-                // std::cout << "名前: " << key << ", 値: " << value << std::endl;
-            }
-            std::cout << s_cJsonConfig.dump(2) << std::endl;
+            std::cout << rcJson.dump(2) << std::endl;
             std::ofstream outFile("config.json");
-            outFile << s_cJsonConfig.dump(2);
+            outFile << rcJson.dump(2);
         } while (false);
     }
 
@@ -66,51 +56,23 @@ namespace {
     ///
     /// JSONテスト関数です。
     ///
-    /// @param     なし
+    /// @param[in] rcJson JSONクラス参照
+    /// @param[in] rcNode ノードクラス参照
     /// @return    なし
     /// @attention なし
     //-------------------------------------------------------------------------
-    void testJson(common::Node& rcNode) {
+    void testJson(json& rcJson, common::Node& rcNode) {
         // 処理ブロック
         do {
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("JSONテスト関数\n");
-
-            // 1. JSONオブジェクトの作成
-            json j;
-            j["name"] = "Taro";
-            j["age"] = 25;
-            j["is_student"] = false;
-            j["skills"] = {"C++", "Python", "CMake"}; // 配列も直感的
-            // 2. 文字列からJSONをパース（解析）
-            std::string raw_data = R"({"city": "Tokyo", "population": 14000000})";
-            json j_from_string = json::parse(raw_data);
-            // 3. データのマージ
-            j.update(j_from_string);
-            // 4. 値の取得
-            // 型を指定して取得（存在しないキーだと例外を投げる）
-            std::string name = j.at("name").get<std::string>();
-            // デフォルト値を指定して安全に取得
-            int score = j.value("score", 0); 
-            // 5. JSONの出力
-            std::cout << "--- Standard Output ---" << std::endl;
-            std::cout << j.dump() << std::endl;
-            std::cout << "\n--- Pretty Print (Indent: 4) ---" << std::endl;
-            std::cout << j.dump(4) << std::endl;
-        } while (false);
-        {
             // JSON構成情報設定
-            json j;
-            j[0] = 0;
-            j[1] = 1;
-            j[2] = 2;
-            j[3] = 3;
             std::string strPath{rcNode.getJsonPointer()};
             nlohmann::json::json_pointer jsonPath(strPath);
-            s_cJsonConfig[jsonPath] = j;
+            rcJson[jsonPath] = "Hello World.";
             // JSON構成情報出力
-            outputJsonConfig();
-        }
+            outJson(rcJson);
+        } while (false);
     }
 }
 
@@ -148,15 +110,44 @@ namespace app_test {
             // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("テストアプリケーション共通ライブラリクラス：デストラクタ\n");
+        } while (false);
+    }
 
-            // jsonテスト
-            try {
-                testJson(*this);
-            }
-            catch (...) {
-                // あらゆる例外（JSONエラー、メモリ不足、標準例外など）をここで受ける
-                std::cerr << "何らかのエラーが発生しました。" << std::endl;
-            }
+    //=========================================================================
+    // 動的公開関数
+    //-------------------------------------------------------------------------
+    // 初期化関数
+    void LibAppTestCommon::init() noexcept
+    {
+        // 処理ブロック
+        do {
+            // 関数情報出力
+            std::cout << std::format("-------------------------------------------------------------------------------\n");
+            std::cout << std::format("テストアプリケーション共通ライブラリクラス：初期化関数\n");
+
+            // JSONテスト
+            AppTest&            rcAppTest  {AppTest::getInstance()};
+            LibAppTestCommon&   rcLibCommon{rcAppTest.getLibCommon()};
+            lib_common::Config& rcConfig   {rcLibCommon.getConfig()};
+            json&               rcJson     {rcConfig.getJson()};
+            testJson(rcJson, *this);
+
+            // 共通ライブラリクラス初期化
+            LibCommon::init();
+        } while (false);
+    }
+
+    //-------------------------------------------------------------------------
+    // 終了関数
+    void LibAppTestCommon::finish() noexcept
+    {
+        // 処理ブロック
+        do {
+            // 関数情報出力
+            std::cout << std::format("-------------------------------------------------------------------------------\n");
+            std::cout << std::format("テストアプリケーション共通ライブラリクラス：終了関数\n");
+            // 共通ライブラリクラス終了
+            LibCommon::finish();
         } while (false);
     }
 }
