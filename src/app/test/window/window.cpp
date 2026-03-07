@@ -12,7 +12,7 @@
 //-----------------------------------------------------------------------------
 #include "app/test/window/window.h"
 #include "app/test/test.h"
-#include "lib/common/config.h"
+// #include "lib/common/config.h"
 #include <iostream>
 #include <fstream>
 
