@@ -25,7 +25,7 @@ namespace common {
     // 動的公開関数
     //-------------------------------------------------------------------------
     // JSONパス文字列取得関数
-    std::string const Node::getJsonPointer() const noexcept {
+    std::string const Node::getJsonPath() const noexcept {
         // 親ノードポインタ判別
         if (nullptr == m_pcParent) {
             // ノード名取得
@@ -33,6 +33,6 @@ namespace common {
         }
         
         // JSONパス文字列とノード名取得
-        return m_pcParent->getJsonPointer()+"/"+getName();
+        return m_pcParent->getJsonPath()+"/"+getName();
     }
 }

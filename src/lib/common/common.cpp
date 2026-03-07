@@ -97,7 +97,7 @@ namespace lib_common {
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("共通ライブラリクラス：コンストラクタ\n");
             std::cout << std::format("ノード名：{}\n", getName());
-            std::cout << std::format("JSONパス：{}\n", getJsonPointer());
+            std::cout << std::format("JSONパス：{}\n", getJsonPath());
             // モジュール情報出力
             OutputModuleInfo(s_hInstance);
         } while (false);

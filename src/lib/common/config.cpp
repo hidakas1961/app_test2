@@ -10,7 +10,8 @@
 //=============================================================================
 // インクルードファイル
 //-----------------------------------------------------------------------------
-// #include "common/common.h"
+#include <iostream>
+#include <fstream>
 
 //=============================================================================
 // インクルード実装ファイル
@@ -61,9 +62,71 @@ namespace lib_common {
     //=========================================================================
     // 動的公開関数
     //-------------------------------------------------------------------------
-    // JSONクラスインスタンス取得関数
+    // JSONクラス取得関数
     json& Config::getJson() noexcept {
         static json s_cJson; ///< JSONクラスインスタンス
         return s_cJson;
+    }
+
+    //-------------------------------------------------------------------------
+    // JSONクラス取得関数
+    json& Config::getJson(std::string const& strPath) noexcept {
+        nlohmann::json::json_pointer jsonPath(strPath);
+        return getJson()[jsonPath];
+    }
+
+    //-------------------------------------------------------------------------
+    // JSONクラス取得関数
+    json& Config::getJson(common::Node& node) noexcept {
+        std::string strPath{node.getJsonPath()};
+        nlohmann::json::json_pointer jsonPath(strPath);
+        return getJson()[jsonPath];
+    }
+
+    //-------------------------------------------------------------------------
+    // 構成情報ロード関数
+    void Config::load() noexcept {
+        // JSONストリームファイル入力
+        std::ifstream inFile(getFilePath());
+        if (inFile) {
+            auto temp = nlohmann::json::parse(inFile, nullptr, false);
+            if (!temp.is_discarded()) {
+                getJson() = std::move(temp);
+            }
+        }
+    }
+
+    //-------------------------------------------------------------------------
+    // 構成情報セーブ関数
+    void Config::save() noexcept {
+        // JSONストリームファイル出力
+        // std::ofstream outFile(getFilePath());
+        std::ofstream outFile(getFilename());
+        outFile << getJson().dump(2);
+    }
+
+    //-------------------------------------------------------------------------
+    // 構成情報出力関数
+    void Config::output() noexcept {
+        // JSONストリーム標準出力
+        std::cout << getJson().dump(2) << std::endl;
+    }
+
+    //-------------------------------------------------------------------------
+    // 構成情報テスト関数
+    void Config::test(common::Node& node) noexcept {
+        std::cout << std::format("-------------------------------------------------------------------------------\n");
+        std::cout << std::format("構成情報テスト関数\n");
+        // 構成情報ロード
+        load();
+        // 構成情報設定
+        std::string                  strPath {node.getJsonPath()+"/Test"};
+        nlohmann::json::json_pointer jsonPath{strPath};
+        json&                        rcJson  {getJson()};
+        rcJson[jsonPath] = "Hello World "+strPath+".";
+        // 構成情報出力
+        output();
+        // 構成情報セーブ
+        save();
     }
 }

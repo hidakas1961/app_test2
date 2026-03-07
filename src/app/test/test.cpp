@@ -11,9 +11,6 @@
 // インクルードファイル
 //-----------------------------------------------------------------------------
 #include "app/test/test.h"
-// #include "lib/common/config.h"
-#include <iostream>
-#include <fstream>
 
 //=============================================================================
 // インクルード実装ファイル
@@ -34,47 +31,6 @@ namespace {
     //=========================================================================
     // ファイルスコープローカル関数
     //-------------------------------------------------------------------------
-    /// JSON構成情報出力関数
-    ///
-    /// JSON構成情報出力です。
-    ///
-    /// @param[in] rcJson JSONクラス参照
-    /// @return    なし
-    /// @attention なし
-    //-------------------------------------------------------------------------
-    void outJson(json& rcJson) {
-        do {
-            std::cout << std::format("-------------------------------------------------------------------------------\n");
-            std::cout << std::format("JSON構成情報出力関数\n");
-            std::cout << rcJson.dump(2) << std::endl;
-            std::ofstream outFile("config.json");
-            outFile << rcJson.dump(2);
-        } while (false);
-    }
-
-    //-------------------------------------------------------------------------
-    /// JSONテスト関数
-    ///
-    /// JSONテスト関数です。
-    ///
-    /// @param[in] rcJson JSONクラス参照
-    /// @param[in] rcNode ノードクラス参照
-    /// @return    なし
-    /// @attention なし
-    //-------------------------------------------------------------------------
-    void testJson(json& rcJson, common::Node& rcNode) {
-        // 処理ブロック
-        do {
-            std::cout << std::format("-------------------------------------------------------------------------------\n");
-            std::cout << std::format("JSONテスト関数\n");
-            // JSON構成情報設定
-            std::string strPath{rcNode.getJsonPointer()+"/Test"};
-            nlohmann::json::json_pointer jsonPath(strPath);
-            rcJson[jsonPath] = "Hello World.";
-            // JSON構成情報出力
-            outJson(rcJson);
-        } while (false);
-    }
 }
 
 //=============================================================================
@@ -131,7 +87,7 @@ namespace app_test {
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("テストアプリケーションクラス：コンストラクタ\n");
             std::cout << std::format("ノード名：{}\n", getName());
-            std::cout << std::format("JSONパス：{}\n", getJsonPointer());
+            std::cout << std::format("JSONパス：{}\n", getJsonPath());
         } while (false);
     }
 
@@ -166,12 +122,8 @@ namespace app_test {
             // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("テストアプリケーションクラス：初期化関数\n");
-
             // JSONテスト
-            lib_common::Config& rcConfig{lib_common::Config::getInstance()};
-            json&               rcJson  {rcConfig.getJson()};
-            testJson(rcJson, *this);
-
+            lib_common::Config::getInstance().test(*this);
             // テストアプリケーション共通ライブラリクラス初期化
             m_cLibCommon.init();
             // テストアプリケーションコンソールライブラリクラス初期化

@@ -77,7 +77,7 @@ namespace common {
         /// @return    文字列クラス
         /// @attention なし
         //---------------------------------------------------------------------
-        std::string const getJsonPointer() const noexcept;
+        std::string const getJsonPath() const noexcept;
 
         //=====================================================================
         // インライン動的公開関数
