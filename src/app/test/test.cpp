@@ -21,7 +21,7 @@
 #include "common/common.hpp"
 #include "common/node.hpp"
 #include "app/program/program.hpp"
-#include <nlohmann/json.hpp>
+#include "lib/common/config.hpp"
 
 //=============================================================================
 /// 無名名前空間
@@ -168,9 +168,8 @@ namespace app_test {
             std::cout << std::format("テストアプリケーションクラス：初期化関数\n");
 
             // JSONテスト
-            LibAppTestCommon&   rcLibCommon{getLibCommon()};
-            lib_common::Config& rcConfig   {rcLibCommon.getConfig()};
-            json&               rcJson     {rcConfig.getJson()};
+            lib_common::Config& rcConfig{lib_common::Config::getInstance()};
+            json&               rcJson  {rcConfig.getJson()};
             testJson(rcJson, *this);
 
             // テストアプリケーション共通ライブラリクラス初期化

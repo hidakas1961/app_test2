@@ -20,7 +20,7 @@
 // インクルード実装ファイル
 //-----------------------------------------------------------------------------
 #include "common/common.hpp"
-#include <nlohmann/json.hpp>
+#include "lib/common/config.hpp"
 
 //=============================================================================
 /// 無名名前空間
@@ -126,10 +126,8 @@ namespace app_test {
             std::cout << std::format("テストアプリケーションコンソールライブラリクラス：初期化関数\n");
 
             // JSONテスト
-            AppTest&            rcAppTest  {AppTest::getInstance()};
-            LibAppTestCommon&   rcLibCommon{rcAppTest.getLibCommon()};
-            lib_common::Config& rcConfig   {rcLibCommon.getConfig()};
-            json&               rcJson     {rcConfig.getJson()};
+            lib_common::Config& rcConfig{lib_common::Config::getInstance()};
+            json&               rcJson  {rcConfig.getJson()};
             testJson(rcJson, *this);
 
             // コンソールライブラリクラス初期化
