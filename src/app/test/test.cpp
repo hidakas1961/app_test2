@@ -11,6 +11,9 @@
 // インクルードファイル
 //-----------------------------------------------------------------------------
 #include "app/test/test.h"
+#include "app/test/common/common.h"
+#include "app/test/console/console.h"
+#include "app/test/window/window.h"
 
 //=============================================================================
 // インクルード実装ファイル
@@ -29,8 +32,9 @@
 //-----------------------------------------------------------------------------
 namespace {
     //=========================================================================
-    // ファイルスコープローカル関数
+    // ファイルスコープローカル変数
     //-------------------------------------------------------------------------
+    app_test::AppTest* s_pInstance{}; ///< テストアプリケーションクラスインスタンスポインタ
 }
 
 //=============================================================================
@@ -53,13 +57,13 @@ namespace program {
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("プログラムクラス：メイン関数\n");
             // モジュール情報出力
-            OutputModuleInfo(hInstance);
+            outputModuleInfo(hInstance);
             // テストアプリケーションクラスインスタンス取得
-            app_test::AppTest& rcAppTest{app_test::AppTest::getInstance()};
+            app_test::AppTest::getInstance();
             // テストアプリケーションクラス初期化
-            rcAppTest.init();
+            app_test::AppTest::init();
             // テストアプリケーションクラス終了
-            rcAppTest.finish();
+            app_test::AppTest::finish();
         } while (false);
 
         // 実行結果
@@ -88,6 +92,8 @@ namespace app_test {
             std::cout << std::format("テストアプリケーションクラス：コンストラクタ\n");
             std::cout << std::format("ノード名：{}\n", getName());
             std::cout << std::format("JSONパス：{}\n", getJsonPath());
+            // テストアプリケーション共通ライブラリクラスインスタンス取得
+            LibAppTestCommon::getInstance();
         } while (false);
     }
 
@@ -107,12 +113,31 @@ namespace app_test {
     //-------------------------------------------------------------------------
     // インスタンス取得関数
     AppTest& AppTest::getInstance() noexcept {
-        static AppTest s_cInstance{}; ///< テストアプリケーションクラスインスタンス
-        return s_cInstance;
+        // 処理ブロック
+        do {
+            // テストアプリケーションクラスインスタンスポインタチェック
+            if (nullptr == s_pInstance) {
+                // テストアプリケーションクラスインスタンス作成
+                s_pInstance = new AppTest();
+            }
+        } while (false);
+        return *s_pInstance;
     }
 
-    //=========================================================================
-    // 動的公開関数
+    //-------------------------------------------------------------------------
+    // インスタンス解放関数
+    void AppTest::releaseInstance() noexcept {
+        // 処理ブロック
+        do {
+            // テストアプリケーションクラスインスタンスポインタチェック
+            if (nullptr != s_pInstance) {
+                // テストアプリケーションクラスインスタンス削除
+                delete s_pInstance;
+                s_pInstance = nullptr;
+            }
+        } while (false);
+    }
+
     //-------------------------------------------------------------------------
     // 初期化関数
     void AppTest::init() noexcept
@@ -123,13 +148,13 @@ namespace app_test {
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("テストアプリケーションクラス：初期化関数\n");
             // JSONテスト
-            lib_common::Config::getInstance().test(*this);
+            // lib_common::Config::getInstance().test(*this);
             // テストアプリケーション共通ライブラリクラス初期化
-            m_cLibCommon.init();
+            LibAppTestCommon::init();
             // テストアプリケーションコンソールライブラリクラス初期化
-            m_cLibConsole.init();
+            LibAppTestConsole::init();
             // テストアプリケーションウィンドウライブラリクラス初期化
-            m_cLibWindow.init();
+            LibAppTestWindow::init();
         } while (false);
     }
 
@@ -143,11 +168,13 @@ namespace app_test {
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("テストアプリケーションクラス：終了関数\n");
             // テストアプリケーションウィンドウライブラリクラス終了
-            m_cLibWindow.finish();
+            LibAppTestWindow::finish();
             // テストアプリケーションコンソールライブラリクラス終了
-            m_cLibConsole.finish();
+            LibAppTestConsole::finish();
             // テストアプリケーション共通ライブラリクラス終了
-            m_cLibCommon.finish();
+            LibAppTestCommon::finish();
+            // テストアプリケーションクラスインスタンス解放
+            releaseInstance();
         } while (false);
     }
 }

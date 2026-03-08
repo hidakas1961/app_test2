@@ -12,7 +12,6 @@
 //-----------------------------------------------------------------------------
 #include "lib/common/common.h"
 #include "lib/common/logout.h"
-#include <string>
 #include <sstream>
 #include <iomanip>
 
@@ -32,8 +31,9 @@ namespace {
     //=========================================================================
     // ファイルスコープローカル変数
     //-------------------------------------------------------------------------
-    static std::string s_strFilename; ///< ログ出力ファイル名
-    static std::string s_strFilePath; ///< ログ出力ファイルパス
+    lib_common::Logout* s_pInstance{}; ///< ログ出力クラスインスタンスポインタ
+    std::string         s_filename {}; ///< ログ出力ファイル名
+    std::string         s_filepath {}; ///< ログ出力ファイルパス
 }
 
 //=============================================================================
@@ -52,7 +52,7 @@ namespace lib_common {
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("ログ出力クラス：コンストラクタ\n");
             // モジュール情報出力
-            OutputModuleInfo(lib_common::LibCommon::getInstanceHandle());
+            outputModuleInfo(lib_common::LibCommon::getInstanceHandle());
         } while (false);
     }
 
@@ -74,55 +74,74 @@ namespace lib_common {
     //-------------------------------------------------------------------------
     // インスタンス取得関数
     Logout& Logout::getInstance() noexcept {
-        static Logout s_cInstance{}; ///< ログ出力クラスインスタンス
-        return s_cInstance;
+        // 処理ブロック
+        do {
+            // ログ出力クラスインスタンスポインタチェック
+            if (nullptr == s_pInstance) {
+                // ログ出力クラスインスタンス作成
+                s_pInstance = new Logout();
+            }
+        } while (false);
+        return *s_pInstance;
     }
 
-    //=========================================================================
-    // 動的公開関数
+    //-------------------------------------------------------------------------
+    // インスタンス解放関数
+    void Logout::releaseInstance() noexcept {
+        // 処理ブロック
+        do {
+            // ログ出力クラスインスタンスポインタチェック
+            if (nullptr != s_pInstance) {
+                // ログ出力クラスインスタンス削除
+                delete s_pInstance;
+                s_pInstance = nullptr;
+            }
+        } while (false);
+    }
+
     //-------------------------------------------------------------------------
     // 初期化関数
-    void Logout::init() noexcept
-    {
+    void Logout::init() noexcept {
         // 処理ブロック
         do {
             // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
-            std::cout << std::format("ログ出力クラス：初期化関数\n");
+            std::cout << std::format("ログ出力クラス      ：初期化関数\n");
             // ログ出力ファイル名作成
             SYSTEMTIME st;
             GetLocalTime(&st);
             std::ostringstream oss;
             oss << std::setfill('0') << st.wYear  << std::setw(2) << st.wMonth << std::setw(2) << st.wDay << "_" << std::setw(2) << st.wHour << std::setw(2) << st.wMinute << std::setw(2) << st.wSecond;
-            s_strFilename = oss.str()+".log";
-            std::cout << std::format("ログ出力ファイル名：{}\n", s_strFilename);
+            s_filename = oss.str()+".log";
             // ログ出力ファイルパス取得
-            s_strFilePath = "./"+s_strFilename;
-            std::cout << std::format("ログ出力ファイルパス：{}\n", s_strFilePath);
+            s_filepath = "./"+s_filename;
+            std::cout << std::format("ログ出力ファイル名  ：{}\n", s_filename);
+            std::cout << std::format("ログ出力ファイルパス：{}\n", s_filepath);
         } while (false);
     }
 
     //-------------------------------------------------------------------------
     // 終了関数
-    void Logout::finish() noexcept
-    {
+    void Logout::finish() noexcept {
         // 処理ブロック
         do {
             // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("ログ出力クラス：終了関数\n");
+            // ログ出力クラスインスタンス解放
+            releaseInstance();
         } while (false);
     }
 
     //-------------------------------------------------------------------------
     // ログ出力ファイル名取得関数
     std::string Logout::getFilename() noexcept {
-        return s_strFilename;
+        return s_filename;
     }
 
     //-------------------------------------------------------------------------
     // ログ出力ファイルパス取得関数
     std::string Logout::getFilePath() noexcept {
-        return s_strFilePath;
+        return s_filepath;
     }
 }

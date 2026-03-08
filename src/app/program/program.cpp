@@ -39,7 +39,7 @@ namespace program {
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("プログラムクラス：メイン関数\n");
             // モジュール情報出力
-            OutputModuleInfo(hInstance);
+            outputModuleInfo(hInstance);
         } while (false);
 
         // 実行結果

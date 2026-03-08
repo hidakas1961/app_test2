@@ -28,8 +28,9 @@
 //-----------------------------------------------------------------------------
 namespace {
     //=========================================================================
-    // ファイルスコープローカル関数
+    // ファイルスコープローカル変数
     //-------------------------------------------------------------------------
+    app_test::LibAppTestConsole* s_pInstance{}; ///< テストアプリケーションコンソールライブラリクラスインスタンスポインタ
 }
 
 //=============================================================================
@@ -54,7 +55,7 @@ namespace app_test {
             std::cout << std::format("ノード名：{}\n", getName());
             std::cout << std::format("JSONパス：{}\n", getJsonPath());
             // モジュール情報出力
-            OutputModuleInfo(nullptr);
+            outputModuleInfo(nullptr);
         } while (false);
     }
 
@@ -70,18 +71,45 @@ namespace app_test {
     }
 
     //=========================================================================
-    // 動的公開関数
+    // 静的公開関数
+    //-------------------------------------------------------------------------
+    // インスタンス取得関数
+    LibAppTestConsole& LibAppTestConsole::getInstance() noexcept {
+        // 処理ブロック
+        do {
+            // テストアプリケーションコンソールライブラリクラスインスタンスポインタチェック
+            if (nullptr == s_pInstance) {
+                // テストアプリケーションコンソールライブラリクラスインスタンス作成
+                s_pInstance = new LibAppTestConsole(nullptr);
+            }
+        } while (false);
+        return *s_pInstance;
+    }
+
+    //-------------------------------------------------------------------------
+    // インスタンス解放関数
+    void LibAppTestConsole::releaseInstance() noexcept {
+        // 処理ブロック
+        do {
+            // テストアプリケーションコンソールライブラリクラスインスタンスポインタチェック
+            if (nullptr != s_pInstance) {
+                // テストアプリケーションコンソールライブラリクラスインスタンス削除
+                delete s_pInstance;
+                s_pInstance = nullptr;
+            }
+        } while (false);
+    }
+
     //-------------------------------------------------------------------------
     // 初期化関数
-    void LibAppTestConsole::init() noexcept
-    {
+    void LibAppTestConsole::init() noexcept {
         // 処理ブロック
         do {
             // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("テストアプリケーションコンソールライブラリクラス：初期化関数\n");
             // JSONテスト
-            lib_common::Config::getInstance().test(*this);
+            // lib_common::Config::getInstance().test(*this);
             // コンソールライブラリクラス初期化
             LibConsole::init();
         } while (false);
@@ -89,8 +117,7 @@ namespace app_test {
 
     //-------------------------------------------------------------------------
     // 終了関数
-    void LibAppTestConsole::finish() noexcept
-    {
+    void LibAppTestConsole::finish() noexcept {
         // 処理ブロック
         do {
             // 関数情報出力
@@ -98,6 +125,8 @@ namespace app_test {
             std::cout << std::format("テストアプリケーションコンソールライブラリクラス：終了関数\n");
             // コンソールライブラリクラス終了
             LibConsole::finish();
+            // テストアプリケーションコンソールライブラリクラスインスタンス解放
+            releaseInstance();
         } while (false);
     }
 }

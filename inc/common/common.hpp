@@ -25,7 +25,7 @@ namespace {
     //-------------------------------------------------------------------------
     // モジュール情報出力関数
     //-------------------------------------------------------------------------
-    void OutputModuleInfo(HINSTANCE hInstance) noexcept {
+    void outputModuleInfo(HINSTANCE hInstance) noexcept {
         // 処理ブロック
         do {
             // モジュールファイルパス取得

@@ -21,7 +21,11 @@
 #endif // LIB_STATIC
 
 //=============================================================================
-// 無名名前空間
+/// 無名名前空間
+///
+/// 無名名前空間です。
+///
+/// @attention なし
 //-----------------------------------------------------------------------------
 namespace {
     //=========================================================================
@@ -99,7 +103,7 @@ namespace lib_window {
             std::cout << std::format("ノード名：{}\n", getName());
             std::cout << std::format("JSONパス：{}\n", getJsonPath());
             // モジュール情報出力
-            OutputModuleInfo(s_hInstance);
+            outputModuleInfo(s_hInstance);
         } while (false);
     }
 
@@ -115,11 +119,17 @@ namespace lib_window {
     }
 
     //=========================================================================
-    // 動的公開関数
+    // 静的公開関数
+    //-------------------------------------------------------------------------
+    // インスタンスハンドル取得関数
+    HINSTANCE LibWindow::getInstanceHandle() noexcept {
+        // インスタンスハンドル取得
+        return s_hInstance;
+    }
+
     //-------------------------------------------------------------------------
     // 初期化関数
-    void LibWindow::init() noexcept
-    {
+    void LibWindow::init() noexcept {
         // 処理ブロック
         do {
             // 関数情報出力
@@ -130,8 +140,7 @@ namespace lib_window {
 
     //-------------------------------------------------------------------------
     // 終了関数
-    void LibWindow::finish() noexcept
-    {
+    void LibWindow::finish() noexcept {
         // 処理ブロック
         do {
             // 関数情報出力

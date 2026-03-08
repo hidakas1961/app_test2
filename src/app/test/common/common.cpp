@@ -28,8 +28,9 @@
 //-----------------------------------------------------------------------------
 namespace {
     //=========================================================================
-    // ファイルスコープローカル関数
+    // ファイルスコープローカル変数
     //-------------------------------------------------------------------------
+    app_test::LibAppTestCommon* s_pInstance{}; ///< テストアプリケーション共通ライブラリクラスインスタンスポインタ
 }
 
 //=============================================================================
@@ -54,7 +55,7 @@ namespace app_test {
             std::cout << std::format("ノード名：{}\n", getName());
             std::cout << std::format("JSONパス：{}\n", getJsonPath());
             // モジュール情報出力
-            OutputModuleInfo(nullptr);
+            outputModuleInfo(nullptr);
         } while (false);
     }
 
@@ -70,7 +71,35 @@ namespace app_test {
     }
 
     //=========================================================================
-    // 動的公開関数
+    // 静的公開関数
+    //-------------------------------------------------------------------------
+    // インスタンス取得関数
+    LibAppTestCommon& LibAppTestCommon::getInstance() noexcept {
+        // 処理ブロック
+        do {
+            // テストアプリケーション共通ライブラリクラスインスタンスポインタチェック
+            if (nullptr == s_pInstance) {
+                // テストアプリケーション共通ライブラリクラスインスタンス作成
+                s_pInstance = new LibAppTestCommon(nullptr);
+            }
+        } while (false);
+        return *s_pInstance;
+    }
+
+    //-------------------------------------------------------------------------
+    // インスタンス解放関数
+    void LibAppTestCommon::releaseInstance() noexcept {
+        // 処理ブロック
+        do {
+            // テストアプリケーション共通ライブラリクラスインスタンスポインタチェック
+            if (nullptr != s_pInstance) {
+                // テストアプリケーション共通ライブラリクラスインスタンス削除
+                delete s_pInstance;
+                s_pInstance = nullptr;
+            }
+        } while (false);
+    }
+
     //-------------------------------------------------------------------------
     // 初期化関数
     void LibAppTestCommon::init() noexcept
@@ -81,7 +110,7 @@ namespace app_test {
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("テストアプリケーション共通ライブラリクラス：初期化関数\n");
             // JSONテスト
-            lib_common::Config::getInstance().test(*this);
+            // lib_common::Config::getInstance().test(*this);
             // 共通ライブラリクラス初期化
             LibCommon::init();
         } while (false);
@@ -98,6 +127,8 @@ namespace app_test {
             std::cout << std::format("テストアプリケーション共通ライブラリクラス：終了関数\n");
             // 共通ライブラリクラス終了
             LibCommon::finish();
+            // テストアプリケーション共通ライブラリクラスインスタンス解放
+            releaseInstance();
         } while (false);
     }
 }

@@ -30,6 +30,7 @@ namespace {
     //=========================================================================
     // ファイルスコープローカル関数
     //-------------------------------------------------------------------------
+    app_test::LibAppTestWindow* s_pInstance{}; ///< テストアプリケーションウィンドウライブラリクラスインスタンスポインタ
 }
 
 //=============================================================================
@@ -54,7 +55,7 @@ namespace app_test {
             std::cout << std::format("ノード名：{}\n", getName());
             std::cout << std::format("JSONパス：{}\n", getJsonPath());
             // モジュール情報出力
-            OutputModuleInfo(nullptr);
+            outputModuleInfo(nullptr);
         } while (false);
     }
 
@@ -70,18 +71,45 @@ namespace app_test {
     }
 
     //=========================================================================
-    // 動的公開関数
+    // 静的公開関数
+    //-------------------------------------------------------------------------
+    // インスタンス取得関数
+    LibAppTestWindow& LibAppTestWindow::getInstance() noexcept {
+        // 処理ブロック
+        do {
+            // テストアプリケーションウィンドウライブラリクラスインスタンスポインタチェック
+            if (nullptr == s_pInstance) {
+                // テストアプリケーションウィンドウライブラリクラスインスタンス作成
+                s_pInstance = new LibAppTestWindow(nullptr);
+            }
+        } while (false);
+        return *s_pInstance;
+    }
+
+    //-------------------------------------------------------------------------
+    // インスタンス解放関数
+    void LibAppTestWindow::releaseInstance() noexcept {
+        // 処理ブロック
+        do {
+            // テストアプリケーションウィンドウライブラリクラスインスタンスポインタチェック
+            if (nullptr != s_pInstance) {
+                // テストアプリケーションウィンドウライブラリクラスインスタンス削除
+                delete s_pInstance;
+                s_pInstance = nullptr;
+            }
+        } while (false);
+    }
+
     //-------------------------------------------------------------------------
     // 初期化関数
-    void LibAppTestWindow::init() noexcept
-    {
+    void LibAppTestWindow::init() noexcept {
         // 処理ブロック
         do {
             // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("テストアプリケーションウィンドウライブラリクラス：初期化関数\n");
             // JSONテスト
-            lib_common::Config::getInstance().test(*this);
+            // lib_common::Config::getInstance().test(*this);
             // ウィンドウライブラリクラス初期化
             LibWindow::init();
         } while (false);
@@ -89,8 +117,7 @@ namespace app_test {
 
     //-------------------------------------------------------------------------
     // 終了関数
-    void LibAppTestWindow::finish() noexcept
-    {
+    void LibAppTestWindow::finish() noexcept {
         // 処理ブロック
         do {
             // 関数情報出力
@@ -98,6 +125,8 @@ namespace app_test {
             std::cout << std::format("テストアプリケーションウィンドウライブラリクラス：終了関数\n");
             // ウィンドウライブラリクラス終了
             LibWindow::finish();
+            // テストアプリケーションウィンドウライブラリクラスインスタンス解放
+            releaseInstance();
         } while (false);
     }
 }

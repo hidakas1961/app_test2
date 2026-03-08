@@ -31,8 +31,10 @@ namespace {
     //=========================================================================
     // ファイルスコープローカル変数
     //-------------------------------------------------------------------------
-    static std::string s_strFilename; ///< 構成情報ファイル名
-    static std::string s_strFilePath; ///< 構成情報ファイルパス
+    lib_common::Config* s_pInstance{}; ///< 構成情報クラスインスタンスポインタ
+    std::string         s_filename {}; ///< 構成情報ファイル名
+    std::string         s_filepath {}; ///< 構成情報ファイルパス
+    json*               s_pJson    {}; ///< JSONクラスインスタンスポインタ
 }
 
 //=============================================================================
@@ -51,7 +53,7 @@ namespace lib_common {
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("構成情報クラス：コンストラクタ\n");
             // モジュール情報出力
-            OutputModuleInfo(lib_common::LibCommon::getInstanceHandle());
+            outputModuleInfo(lib_common::LibCommon::getInstanceHandle());
         } while (false);
     }
 
@@ -73,121 +75,173 @@ namespace lib_common {
     //-------------------------------------------------------------------------
     // インスタンス取得関数
     Config& Config::getInstance() noexcept {
-        static Config s_cInstance{}; ///< 構成情報クラスインスタンス
-        return s_cInstance;
+        // 処理ブロック
+        do {
+            // 構成情報クラスインスタンスポインタチェック
+            if (nullptr == s_pInstance) {
+                // 構成情報クラスインスタンス作成
+                s_pInstance = new Config();
+            }
+        } while (false);
+        return *s_pInstance;
     }
 
-    //=========================================================================
-    // 動的公開関数
+    //-------------------------------------------------------------------------
+    // インスタンス解放関数
+    void Config::releaseInstance() noexcept {
+        // 処理ブロック
+        do {
+            // 構成情報クラスインスタンスポインタチェック
+            if (nullptr != s_pInstance) {
+                // 構成情報クラスインスタンス削除
+                delete s_pInstance;
+                s_pInstance = nullptr;
+            }
+        } while (false);
+    }
+
     //-------------------------------------------------------------------------
     // 初期化関数
-    void Config::init() noexcept
-    {
+    void Config::init() noexcept {
         // 処理ブロック
         do {
             // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
-            std::cout << std::format("構成情報クラス：初期化関数\n");
+            std::cout << std::format("構成情報クラス      ：初期化関数\n");
             // 構成情報ファイル名取得関数
-            s_strFilename = "config.json";
-            std::cout << std::format("構成情報ファイル名：{}\n", s_strFilename);
+            s_filename = "config.json";
             // 構成情報ファイルパス取得関数
-            s_strFilePath = "./"+s_strFilename;
-            std::cout << std::format("構成情報ファイルパス：{}\n", s_strFilePath);
+            s_filepath = "./"+s_filename;
+            std::cout << std::format("構成情報ファイル名  ：{}\n", s_filename);
+            std::cout << std::format("構成情報ファイルパス：{}\n", s_filepath);
         } while (false);
     }
 
     //-------------------------------------------------------------------------
     // 終了関数
-    void Config::finish() noexcept
-    {
+    void Config::finish() noexcept {
         // 処理ブロック
         do {
             // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("構成情報クラス：終了関数\n");
+            // 構成情報クラスインスタンス解放
+            releaseInstance();
         } while (false);
     }
 
     //-------------------------------------------------------------------------
     // 構成情報ファイル名取得関数
     std::string Config::getFilename() noexcept {
-        return s_strFilename;
+        return s_filename;
     }
 
     //-------------------------------------------------------------------------
     // 構成情報ファイルパス取得関数
     std::string Config::getFilePath() noexcept {
-        return s_strFilePath;
+        return s_filepath;
     }
 
-    //=========================================================================
-    // 動的公開関数
     //-------------------------------------------------------------------------
-    // JSONクラス取得関数
+    // JSONクラスインスタンス取得関数
     json& Config::getJson() noexcept {
-        static json s_cJson; ///< JSONクラスインスタンス
-        return s_cJson;
+        // 処理ブロック
+        do {
+            // JSONクラスインスタンスポインタチェック
+            if (nullptr == s_pJson) {
+                // JSONクラスインスタンス作成
+                s_pJson = new json();
+            }
+        } while (false);
+        return *s_pJson;
+    }
+
+    //-------------------------------------------------------------------------
+    // JSONクラスインスタンス解放関数
+    void Config::releaseJson() noexcept {
+        // 処理ブロック
+        do {
+            // JSONクラスインスタンスポインタチェック
+            if (nullptr != s_pJson) {
+                // JSONクラスインスタンス削除
+                delete s_pJson;
+                s_pJson = nullptr;
+            }
+        } while (false);
     }
 
     //-------------------------------------------------------------------------
     // JSONクラス取得関数
-    json& Config::getJson(std::string const& strPath) noexcept {
-        nlohmann::json::json_pointer jsonPath(strPath);
-        return getJson()[jsonPath];
+    json& Config::getJson(std::string const& path) noexcept {
+        // json_pointer取得
+        nlohmann::json::json_pointer ptr(path);
+        return getJson()[ptr];
     }
 
     //-------------------------------------------------------------------------
     // JSONクラス取得関数
     json& Config::getJson(common::Node& node) noexcept {
-        std::string strPath{node.getJsonPath()};
-        nlohmann::json::json_pointer jsonPath(strPath);
-        return getJson()[jsonPath];
+        // json_pointer取得
+        std::string path{node.getJsonPath()};
+        nlohmann::json::json_pointer ptr(path);
+        return getJson()[ptr];
     }
 
     //-------------------------------------------------------------------------
     // 構成情報ロード関数
     void Config::load() noexcept {
-        // JSONストリームファイル入力
-        std::ifstream inFile(getFilePath());
-        if (inFile) {
-            auto temp = nlohmann::json::parse(inFile, nullptr, false);
-            if (!temp.is_discarded()) {
-                getJson() = std::move(temp);
+        // 処理ブロック
+        do {
+            // JSONストリームファイル入力
+            std::ifstream ifs(getFilePath());
+            if (ifs) {
+                auto temp = nlohmann::json::parse(ifs, nullptr, false);
+                if (!temp.is_discarded()) {
+                    getJson() = std::move(temp);
+                }
             }
-        }
+        } while (false);
     }
 
     //-------------------------------------------------------------------------
     // 構成情報セーブ関数
     void Config::save() noexcept {
-        // JSONストリームファイル出力
-        std::ofstream outFile(getFilePath());
-        outFile << getJson().dump(2);
+        // 処理ブロック
+        do {
+            // JSONストリームファイル出力
+            std::ofstream ofs(getFilePath());
+            ofs << getJson().dump(2);
+        } while (false);
     }
 
     //-------------------------------------------------------------------------
     // 構成情報出力関数
     void Config::output() noexcept {
-        // JSONストリーム標準出力
-        std::cout << getJson().dump(2) << std::endl;
+        // 処理ブロック
+        do {
+            // JSONストリーム標準出力
+            std::cout << getJson().dump(2) << std::endl;
+        } while (false);
     }
 
     //-------------------------------------------------------------------------
     // 構成情報テスト関数
     void Config::test(common::Node& node) noexcept {
-        std::cout << std::format("-------------------------------------------------------------------------------\n");
-        std::cout << std::format("構成情報テスト関数\n");
-        // 構成情報ロード
-        load();
-        // 構成情報設定
-        std::string                  strPath {node.getJsonPath()+"/Test"};
-        nlohmann::json::json_pointer jsonPath{strPath};
-        json&                        rcJson  {getJson()};
-        rcJson[jsonPath] = "Hello World "+strPath+".";
-        // 構成情報出力
-        output();
-        // 構成情報セーブ
-        save();
+        // 処理ブロック
+        do {
+            std::cout << std::format("-------------------------------------------------------------------------------\n");
+            std::cout << std::format("構成情報テスト関数\n");
+            // 構成情報ロード
+            load();
+            // 構成情報設定
+            std::string                  path{node.getJsonPath()+"/Test"};
+            nlohmann::json::json_pointer ptr {path};
+            json&                        json{getJson()};
+            json[ptr] = "Hello World "+path+".";
+            // 構成情報出力
+            output();
+            // 構成情報セーブ
+            save();
+        } while (false);
     }
 }

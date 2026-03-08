@@ -105,7 +105,7 @@ namespace lib_common {
             std::cout << std::format("ノード名：{}\n", getName());
             std::cout << std::format("JSONパス：{}\n", getJsonPath());
             // モジュール情報出力
-            OutputModuleInfo(s_hInstance);
+            outputModuleInfo(s_hInstance);
             // 構成情報クラスインスタンス取得
             lib_common::Config::getInstance();
             // ログ出力クラスインスタンス取得
@@ -128,39 +128,38 @@ namespace lib_common {
     // 静的公開関数
     //-------------------------------------------------------------------------
     // インスタンスハンドル取得関数
-    HINSTANCE LibCommon::getInstanceHandle() noexcept
-    {
+    HINSTANCE LibCommon::getInstanceHandle() noexcept {
         // インスタンスハンドル取得
         return s_hInstance;
     }
 
-    //=========================================================================
-    // 動的公開関数
     //-------------------------------------------------------------------------
     // 初期化関数
-    void LibCommon::init() noexcept
-    {
+    void LibCommon::init() noexcept {
         // 処理ブロック
         do {
             // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("共通ライブラリクラス：初期化関数\n");
             // 構成情報クラス初期化
-            Config::getInstance().init();
+            Config::init();
             // ログ出力クラス初期化
-            Logout::getInstance().init(); 
+            Logout::init(); 
         } while (false);
     }
 
     //-------------------------------------------------------------------------
     // 終了関数
-    void LibCommon::finish() noexcept
-    {
+    void LibCommon::finish() noexcept {
         // 処理ブロック
         do {
             // 関数情報出力
             std::cout << std::format("-------------------------------------------------------------------------------\n");
             std::cout << std::format("共通ライブラリクラス：終了関数\n");
+            // ログ出力クラス終了
+            Logout::finish(); 
+            // 構成情報クラス終了
+            Config::finish();
         } while (false);
     }
 }
