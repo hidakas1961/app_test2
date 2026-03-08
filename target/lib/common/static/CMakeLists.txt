@@ -8,6 +8,7 @@ message(STATUS "ターゲット名：static_common")
 add_library(static_common STATIC
   ${PROJECT_SOURCE_DIR}/src/lib/common/common.cpp
   ${PROJECT_SOURCE_DIR}/src/lib/common/config.cpp
+  ${PROJECT_SOURCE_DIR}/src/lib/common/logout.cpp
 )
 
 #------------------------------------------------------------------------------

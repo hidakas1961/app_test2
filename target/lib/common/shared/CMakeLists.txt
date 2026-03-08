@@ -8,6 +8,7 @@ message(STATUS "ターゲット名：shared_common")
 add_library(shared_common SHARED
   ${PROJECT_SOURCE_DIR}/src/lib/common/common.cpp
   ${PROJECT_SOURCE_DIR}/src/lib/common/config.cpp
+  ${PROJECT_SOURCE_DIR}/src/lib/common/logout.cpp
 )
 
 #------------------------------------------------------------------------------
